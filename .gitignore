@@ -1,5 +1,11 @@
 # Compiled class file
 *.class
+test/
+build/
+build.xml
+nbproject/
+manifest.mf
+.vscode/
 
 # Log file
 *.log
