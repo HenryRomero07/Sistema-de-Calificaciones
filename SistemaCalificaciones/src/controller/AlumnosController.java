@@ -19,6 +19,14 @@ public class AlumnosController {
                 return false; 
             }
         }
+        public String [][] listar (){
+            try {
+                return util.listAll(archivo_alumnos);
+            } catch (Exception e) {
+                System.out.println("Error en listar" + e);
+                return null;
+            }
+        }
         public String [][] buscarPorcorreo (String Correo){
         try {
             String [][] todos = util.listAll(archivo);
