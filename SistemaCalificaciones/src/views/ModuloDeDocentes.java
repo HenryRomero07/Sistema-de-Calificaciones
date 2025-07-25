@@ -23,23 +23,23 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     /**
      * Creates new form ModuloDeDocentes
      */
-    public ModuloDeDocentes(java.awt.Frame parent, boolean modal, String nombreDocente) throws IOException {
+    public ModuloDeDocentes(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
-
-        jLabel6.setText(nombreDocente);
+        
+//        jLabelNombreDocente.setText(nombreDocente);
         cargarTabla();
         
-        JButton[] botonesMaterias = {btnMateria1, btnMateria2, btnMateria3, btnMateria4};
+        JButton[] botonesMaterias = {btnMateria1, btnMateria2, btnMateria3, btnMateria4, btnMateria5};
 
         for (JButton boton : botonesMaterias) {
             boton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     String materiaSeleccionada = boton.getText();
-                    jLabel5.setText(materiaSeleccionada);
+                    jLabelNombreMateria.setText(materiaSeleccionada);
                     try {
                         cargarTablaPorMateria(materiaSeleccionada);
-                        cargarEstudiantesPorMateria(materiaSeleccionada);
+//                        cargarEstudiantesPorMateria(materiaSeleccionada);
                     } catch (IOException ex) {
                         Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -48,8 +48,9 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         }
     }
 
-    private void cargarTabla() throws IOException {
-        mlt.setData(controlador.listar());
+       private void cargarTabla() throws IOException {
+        String materia = "Matematicas";
+        mlt.setData(controlador.listarPorMateria(materia));
         jTable2.setModel(mlt);
         jTable2.updateUI();
     }
@@ -62,14 +63,14 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     jTable2.updateUI();
 }
     
-    private void cargarEstudiantesPorMateria(String materia) throws IOException {
-    String[][] data = controlador.listarPorMateria(materia); 
-    String[] estudiantes = new String[data.length];
-
-    for (int i = 0; i < data.length; i++) {
-        estudiantes[i] = data[i][1]; 
-    }
-}
+//    private void cargarEstudiantesPorMateria(String materia) throws IOException {
+//    String[][] data = controlador.listarPorMateria(materia); 
+//    String[] estudiantes = new String[data.length];
+//
+//    for (int i = 0; i < data.length; i++) {
+//        estudiantes[i] = data[i][1]; 
+//    }
+//}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,11 +86,11 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelNombreDocente = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelNombreMateria = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -97,6 +98,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         btnMateria2 = new javax.swing.JButton();
         btnMateria3 = new javax.swing.JButton();
         btnMateria4 = new javax.swing.JButton();
+        btnMateria5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -121,12 +123,12 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(80, 50, 70, 0);
 
-        jLabel6.setText("Ing. Jeam Romero");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(80, 40, 150, 16);
+        jLabelNombreDocente.setText("Ing. Jeam Romero");
+        jPanel2.add(jLabelNombreDocente);
+        jLabelNombreDocente.setBounds(80, 40, 150, 16);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 20, 640, 70);
+        jPanel2.setBounds(20, 20, 880, 70);
 
         jPanel3.setBackground(new java.awt.Color(239, 195, 98));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -147,14 +149,14 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable2);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 40, 620, 190);
+        jScrollPane2.setBounds(30, 60, 830, 190);
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        jLabel5.setText("Materia 1");
-        jLabel5.setAutoscrolls(true);
-        jPanel3.add(jLabel5);
-        jLabel5.setBounds(20, 10, 110, 21);
+        jLabelNombreMateria.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelNombreMateria.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        jLabelNombreMateria.setText("Materia 1");
+        jLabelNombreMateria.setAutoscrolls(true);
+        jPanel3.add(jLabelNombreMateria);
+        jLabelNombreMateria.setBounds(30, 20, 110, 21);
 
         jButton1.setText("Asignar Nota");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -163,10 +165,10 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
             }
         });
         jPanel3.add(jButton1);
-        jButton1.setBounds(495, 10, 130, 23);
+        jButton1.setBounds(710, 20, 130, 23);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(20, 190, 640, 260);
+        jPanel3.setBounds(20, 190, 880, 280);
 
         jPanel5.setBackground(new java.awt.Color(239, 195, 98));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -178,7 +180,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jPanel5.add(jLabel7);
         jLabel7.setBounds(20, 10, 90, 21);
 
-        btnMateria1.setText("Matemáticas");
+        btnMateria1.setText("Sociales");
         btnMateria1.setBorder(new javax.swing.border.MatteBorder(null));
         btnMateria1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,25 +198,45 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnMateria2);
-        btnMateria2.setBounds(170, 40, 130, 30);
+        btnMateria2.setBounds(180, 40, 130, 30);
 
-        btnMateria3.setText("Ingles");
+        btnMateria3.setText("Discretas");
         btnMateria3.setBorder(new javax.swing.border.MatteBorder(null));
+        btnMateria3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMateria3ActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnMateria3);
-        btnMateria3.setBounds(330, 40, 130, 30);
+        btnMateria3.setBounds(350, 40, 130, 30);
 
-        btnMateria4.setText("Lengua");
+        btnMateria4.setText("Matematicas");
         btnMateria4.setBorder(new javax.swing.border.MatteBorder(null));
+        btnMateria4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMateria4ActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnMateria4);
-        btnMateria4.setBounds(480, 40, 130, 30);
+        btnMateria4.setBounds(530, 40, 130, 30);
+
+        btnMateria5.setText("Biologia");
+        btnMateria5.setBorder(new javax.swing.border.MatteBorder(null));
+        btnMateria5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMateria5ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnMateria5);
+        btnMateria5.setBounds(700, 40, 130, 30);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(20, 100, 640, 80);
+        jPanel5.setBounds(20, 100, 880, 80);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 690, 510);
+        jPanel1.setBounds(0, 0, 930, 570);
 
-        setSize(new java.awt.Dimension(704, 609));
+        setSize(new java.awt.Dimension(948, 609));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -231,6 +253,18 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnMateria4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMateria4ActionPerformed
+
+    private void btnMateria3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMateria3ActionPerformed
+
+    private void btnMateria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMateria5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,7 +298,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
             public void run() {
                 ModuloDeDocentes dialog = null;
                 try {
-                    dialog = new ModuloDeDocentes(new javax.swing.JFrame(), true, "Ing. Jeam Romero");
+                    dialog = new ModuloDeDocentes(new javax.swing.JFrame(), true);
                 } catch (IOException ex) {
                     Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -284,13 +318,14 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     private javax.swing.JButton btnMateria2;
     private javax.swing.JButton btnMateria3;
     private javax.swing.JButton btnMateria4;
+    private javax.swing.JButton btnMateria5;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelNombreDocente;
+    private javax.swing.JLabel jLabelNombreMateria;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
