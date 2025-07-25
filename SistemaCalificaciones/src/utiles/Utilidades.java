@@ -9,7 +9,7 @@ import java.io.*;
  * @author Usuario iTC
  */
 public class Utilidades {
-    public String [][ ] listAll(String fileName) throws IOException {
+    public String [][] listAll(String fileName) throws IOException {
         int lineCount = 0;
         BufferedReader br = new BufferedReader (new FileReader (fileName));
         while (br.readLine() != null){
@@ -27,5 +27,11 @@ public class Utilidades {
         br.close();
         return datos;
     }
+     public void save(String data, String fileName) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
+        bw.write(data);
+        bw.newLine();
+        bw.close();
+}
 }
 
