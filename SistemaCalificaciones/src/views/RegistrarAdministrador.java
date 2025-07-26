@@ -81,7 +81,7 @@ public class RegistrarAdministrador extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "complete el numero de telefono", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()) + " invalido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Cedula o Pasaporte invalido", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "telefono Existente", "Error", JOptionPane.ERROR_MESSAGE);

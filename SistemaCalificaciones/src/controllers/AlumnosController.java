@@ -15,7 +15,7 @@ public class AlumnosController {
     private String archivo = "notas_estudiantes";
     private String archivo_alumnos = "Notas_alumnos";
 
-    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Telefono, String Correo, Curso Curso, String[] Materias) {
+    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Telefono, String Correo, Curso Curso, String Materias) {
         String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\t" + Materias +"\n";
         try {
             util.save(data, archivo_alumnos);

@@ -4,6 +4,7 @@
  */
 package views;
 
+import controllers.AlumnosController;
 import enums.Curso;
 import enums.TipoIdentificacion;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ import controllers.ControllerLogin;
 public class RegistrarEstudiante extends javax.swing.JDialog {
     private ControllerLogin log = new ControllerLogin();
     private ModeloRegistroEstudiante mre = new ModeloRegistroEstudiante();
-    /*doc controller estudiante*/
+    private AlumnosController est = new AlumnosController();
     /**
      * Creates new form RegistrarEstudiante
      */
@@ -35,9 +36,9 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
         txtcontrasena1.setText("");
         txtcontrasenaval.setText("");
         cargar();
-        /*if (est.listar()!=null){
+        if (est.listar()!=null){
             cargarTabla();
-        }*/
+        }
     } 
     public void cargar(){
         cbxtipo.removeAllItems();
@@ -50,7 +51,7 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
         }
     }
     private void cargarTabla(){
-        mre.setEstudiantes(log.listar()/*listar de docentes*/);
+        mre.setEstudiantes(est.listar());
         TablasEst.setModel(mre);
         TablasEst.updateUI();
     }
@@ -66,7 +67,9 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
                             if (log.verificarTelefonoValido(txtTelefono.getText())) {
                                 if (log.CoincidirContraseña(String.valueOf(txtcontrasena1.getPassword()), String.valueOf(txtcontrasenaval.getPassword()))) {
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
-                                            String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())/*guardar de estudiantes*/) {
+                                            String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&&est.guardar(txtIdentificacion.getText(), 
+                                                    TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(),
+                                                    txtTelefono.getText(), txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), "---")) {
                                         Limpiar();
                                         JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                                     } else {
@@ -79,7 +82,7 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "complete el numero de telefono", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()) + " invalido", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,  "Cedula o Pasaporte invalido", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "telefono Existente", "Error", JOptionPane.ERROR_MESSAGE);
