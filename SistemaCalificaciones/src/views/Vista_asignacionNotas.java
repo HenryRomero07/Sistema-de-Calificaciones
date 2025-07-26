@@ -1,6 +1,6 @@
 package views;
 
-import controllers.Utilidades;
+
 import controllers.notasController;
 import modeloTabla.mt_asignacion;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import utiles.Utilidades;
 
 /**
  *
