@@ -1,0 +1,338 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
+package views;
+
+import enums.TipoIdentificacion;
+import javax.swing.JOptionPane;
+import modeloTabla.ModeloRegistroAdministrador;
+import controllers.ARadministrador;
+import controllers.ControllerLogin;
+
+/**
+ *
+ * @author franz
+ */
+public class RegistrarAdministrador extends javax.swing.JDialog {
+
+    private ControllerLogin log = new ControllerLogin();
+    private ModeloRegistroAdministrador mra = new ModeloRegistroAdministrador();
+    private ARadministrador adm = new ARadministrador();
+
+    /**
+     * Creates new form RegistrarAdministrador
+     */
+    public RegistrarAdministrador(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        cargar();
+        Limpiar();
+    }
+    public void cargar(){
+        cbxtipo.removeAllItems();
+        for (TipoIdentificacion ti: TipoIdentificacion.values()){
+            cbxtipo.addItem(ti.toString());
+        }
+    }
+    public void cargarTabla() {
+        mra.setData(adm.listar());
+        TablaAdm.setModel(mra);
+        TablaAdm.updateUI();
+    }
+
+    private void Limpiar() {
+        txtApellidos.setText("");
+        txtCorreo.setText("");
+        txtIdentificacion.setText("");
+        txtNombres.setText("");
+        txtTelefono.setText("");
+        txtcontrasena1.setText("");
+        txtcontrasenaval.setText("");
+        if (adm.listar()!=null){
+            cargarTabla();
+        }
+    }
+
+    private void RegistroAdm() {
+        if (txtApellidos.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtIdentificacion.getText().isEmpty()
+                || txtNombres.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtcontrasena1.getPassword().length==0 || txtcontrasenaval.getPassword().length==0) {
+            JOptionPane.showMessageDialog(null, "LLene todos los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (!log.verifiCorreo(txtCorreo.getText())) {
+                if (!log.verificarCedula(txtIdentificacion.getText())) {
+                    if (!log.verificarTelefono(txtTelefono.getText())) {
+                        if (log.validaridentificacion(String.valueOf(cbxtipo.getSelectedItem()), txtIdentificacion.getText())) {
+                            if (log.verificarTelefonoValido(txtTelefono.getText())) {
+                                if (log.CoincidirContraseña(String.valueOf(txtcontrasena1.getPassword()), String.valueOf(txtcontrasenaval.getPassword()))) {
+                                    if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
+                                            String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText()) && adm.registrarAdm(txtIdentificacion.getText(),
+                                            TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()),
+                                            txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText())) {
+                                        Limpiar();
+                                        JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "No se pudo registrar", "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "La contraseña no coincide", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "complete el numero de telefono", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()) + " invalido", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "telefono Existente", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cedula Existente", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Correo Existente", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaAdm = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        cbxtipo = new javax.swing.JComboBox<>();
+        txtApellidos = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtNombres = new javax.swing.JTextField();
+        txtIdentificacion = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        txtcontrasenaval = new javax.swing.JPasswordField();
+        txtcontrasena1 = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar Administrador");
+        getContentPane().setLayout(null);
+
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Registrar Administrador");
+        jLabel1.setToolTipText("");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(250, 10, 160, 19);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setLayout(null);
+
+        TablaAdm.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TablaAdm.setMinimumSize(new java.awt.Dimension(20, 64));
+        jScrollPane1.setViewportView(TablaAdm);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 610, 120);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(20, 280, 630, 160);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(null);
+
+        cbxtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(cbxtipo);
+        cbxtipo.setBounds(120, 10, 110, 24);
+        jPanel3.add(txtApellidos);
+        txtApellidos.setBounds(120, 130, 110, 30);
+
+        jLabel3.setText("Tipo Identificacion");
+        jPanel3.add(jLabel3);
+        jLabel3.setBounds(20, 10, 100, 20);
+
+        jLabel4.setText("Confirmar Contraseña");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(350, 130, 120, 20);
+
+        jLabel5.setText("Apellidos");
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(20, 130, 70, 20);
+
+        jLabel6.setText("Identificacion");
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(20, 50, 70, 20);
+        jPanel3.add(txtNombres);
+        txtNombres.setBounds(120, 90, 110, 30);
+
+        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdentificacionActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtIdentificacion);
+        txtIdentificacion.setBounds(120, 50, 110, 30);
+
+        jLabel7.setText("Nombres");
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(20, 90, 70, 20);
+
+        jLabel8.setText("Telefono");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(350, 10, 70, 20);
+
+        jLabel9.setText("Contraseña");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(350, 90, 70, 20);
+
+        jLabel10.setText("Correo");
+        jPanel3.add(jLabel10);
+        jLabel10.setBounds(350, 50, 70, 20);
+        jPanel3.add(txtTelefono);
+        txtTelefono.setBounds(490, 10, 110, 30);
+        jPanel3.add(txtCorreo);
+        txtCorreo.setBounds(490, 50, 110, 30);
+        jPanel3.add(txtcontrasenaval);
+        txtcontrasenaval.setBounds(490, 130, 110, 30);
+        jPanel3.add(txtcontrasena1);
+        txtcontrasena1.setBounds(490, 90, 110, 30);
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(20, 40, 630, 170);
+
+        jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(530, 230, 80, 25);
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(430, 230, 80, 25);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 660, 440);
+
+        setSize(new java.awt.Dimension(684, 487));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdentificacionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        RegistroAdm();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(RegistrarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(RegistrarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(RegistrarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(RegistrarAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                RegistrarAdministrador dialog = new RegistrarAdministrador(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaAdm;
+    private javax.swing.JComboBox<String> cbxtipo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtIdentificacion;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JPasswordField txtcontrasena1;
+    private javax.swing.JPasswordField txtcontrasenaval;
+    // End of variables declaration//GEN-END:variables
+}
