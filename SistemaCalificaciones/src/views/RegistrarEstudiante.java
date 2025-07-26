@@ -8,7 +8,7 @@ import enums.Curso;
 import enums.TipoIdentificacion;
 import javax.swing.JOptionPane;
 import modeloTabla.ModeloRegistroEstudiante;
-import proyectofinal.ControllerLogin;
+import controllers.ControllerLogin;
 
 /**
  *

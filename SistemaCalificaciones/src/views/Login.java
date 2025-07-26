@@ -5,8 +5,8 @@
 package views;
 
 import javax.swing.JOptionPane;
-import proyectofinal.ARadministrador;
-import proyectofinal.ControllerLogin;
+import controllers.ARadministrador;
+import controllers.ControllerLogin;
 
 /**
  *

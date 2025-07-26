@@ -28,16 +28,48 @@ public class ModeloRegistroEstudiante extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return estudiantes[0].length;
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if(estudiantes!=null){
-             return estudiantes[rowIndex][columnIndex];
-        }else {
-            return null;
+         switch (columnIndex) {
+            case 0:                
+                return estudiantes[rowIndex][0];
+            case 1:
+                return estudiantes[rowIndex][1];
+            case 2:
+                return estudiantes[rowIndex][2];
+            case 3:
+                return estudiantes[rowIndex][3];
+            case 4:
+                return estudiantes[rowIndex][4];
+            case 5:
+                return estudiantes[rowIndex][5];
+            default:
+                return null;
         }
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        switch (column) {
+            case 0:                
+                return "Cedula";
+            case 1:
+                return "tipo de identificacion";
+            case 2:
+                return "Nombres";
+            case 3:
+                return "Apellidos";
+            case 4:
+                return "Telefono";
+            case 5:
+                return "Correo";
+            default:
+                return null;
+        }
+    
     }
     
 }

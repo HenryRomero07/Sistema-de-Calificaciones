@@ -7,8 +7,8 @@ package views;
 import enums.TipoIdentificacion;
 import javax.swing.JOptionPane;
 import modeloTabla.ModeloRegistroAdministrador;
-import proyectofinal.ARadministrador;
-import proyectofinal.ControllerLogin;
+import controllers.ARadministrador;
+import controllers.ControllerLogin;
 
 /**
  *
