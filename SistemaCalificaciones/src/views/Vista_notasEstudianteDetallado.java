@@ -1,6 +1,6 @@
 package views;
 
-import controladorNotas.notasController;
+import controllers.notasController;
 import modeloTabla.mt_notasEstudiante;
 import java.io.IOException;
 import java.util.logging.Level;

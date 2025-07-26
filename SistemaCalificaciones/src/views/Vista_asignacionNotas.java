@@ -1,7 +1,7 @@
 package views;
 
-import controladorNotas.Utilidades;
-import controladorNotas.notasController;
+import controllers.Utilidades;
+import controllers.notasController;
 import modeloTabla.mt_asignacion;
 import java.io.File;
 import java.io.FileWriter;
