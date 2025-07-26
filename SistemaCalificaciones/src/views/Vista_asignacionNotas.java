@@ -3,8 +3,6 @@ package views;
 import controllers.Utilidades;
 import controllers.notasController;
 import modeloTabla.mt_asignacion;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,27 +35,30 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     }
 
     public void actualizarTabla() {
-        int row = mt.getRowCount();
-        int column = mt.getColumnCount();
-        String[][] nuevosDatos = new String[row][column];
-        StringBuilder archivoActualizado = new StringBuilder();
-        for (int i = row; i < row; i++) {
-            for (int j = column; j < column; j++) {
-                Object valor = tabla.getValueAt(row, column);
-                nuevosDatos[i][j] = (valor != null) ? valor.toString() : "0.0";
-                archivoActualizado.append(nuevosDatos[i][j]);
-                if (j < column - 1) {
-                    archivoActualizado.append("\t");
+        int filas = tabla.getRowCount();
+        try {
+            for (int i = 0; i < filas; i++) {
+                String nuevoNombre = (String) tabla.getValueAt(i, 0);
+
+                String[] nuevasNotas = new String[9];
+                for (int j = 0; j < 9; j++) {
+                    Object val = tabla.getValueAt(i, j + 1);
+                    nuevasNotas[j] = val != null ? val.toString() : "0.0";
                 }
 
+                boolean exito = nc.actualizarNombreYNotas(i, nuevoNombre, nuevasNotas);
+                if (!exito) {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar fila " + i);
+                    return;
+                }
             }
-            archivoActualizado.append("\n");
+            JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
+            cargarTabla();  
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al guardar archivo: " + ex.getMessage());
         }
-        tabla.setModel(mt);
-        mt.setData(nuevosDatos);
-        //metodo actulizar data
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
