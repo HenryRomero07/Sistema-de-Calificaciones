@@ -9,29 +9,58 @@ import java.io.*;
  * @author Usuario iTC
  */
 public class Utilidades {
-    public String [][] listAll(String fileName) throws IOException {
-        int lineCount = 0;
-        BufferedReader br = new BufferedReader (new FileReader (fileName));
-        while (br.readLine() != null){
-            lineCount ++;
-        }
-        br.close();
-        
-        String [][] datos = new String [lineCount][];
-        br = new BufferedReader (new FileReader(fileName));
-        int index = 0;
-        String linea;
-        while ((linea = br.readLine())!= null){
-            datos[index++] = linea.split("\t");
-        }
-        br.close();
-        return datos;
-    }
-     public void save(String data, String fileName) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
-        bw.write(data);
-        bw.newLine();
-        bw.close();
-}
-}
+    private String path = "data";
 
+    public void save(String text, String name_file) throws IOException {
+        FileWriter file = new FileWriter("src" + File.separatorChar +path + File.separatorChar + name_file, true);
+        file.write(text);
+        file.close();
+
+    }
+
+    public String[][] listAll(String name_file) throws IOException {
+        String[][] data = null;
+        Integer filas = countRegister(name_file);
+        if (filas > 0) {
+            Integer col = countColumn(name_file);
+            System.out.println("Columnas " + col);
+            data = new String[filas][col];
+            FileReader file = new FileReader("src" + File.separatorChar + path + File.separatorChar + name_file);
+            BufferedReader br = new BufferedReader(file);
+            String linea = br.readLine();
+            int fil = 0;
+            while (linea != null) {
+                String[] columas = linea.split("\t");
+                for (int j = 0; j < columas.length; j++) {
+                    data[fil][j] = columas[j];
+                }
+                fil++;
+                linea = br.readLine();
+            }
+            file.close();
+            br.close();
+        }
+
+        System.out.println();
+        return data;
+    }
+
+    private int countRegister(String name_file) throws IOException {
+        FileReader file = new FileReader("src" + File.separatorChar +path + File.separatorChar + name_file);
+        BufferedReader br = new BufferedReader(file);
+        int lines = (int) br.lines().count();
+        file.close();
+        br.close();
+        return lines;
+    }
+
+    private int countColumn(String name_file) throws IOException {
+        FileReader file = new FileReader("src" + File.separatorChar +path + File.separatorChar + name_file);
+        BufferedReader br = new BufferedReader(file);
+        String line = br.readLine();
+        file.close();
+        br.close();
+        return line.split("\t").length;
+    }
+
+}

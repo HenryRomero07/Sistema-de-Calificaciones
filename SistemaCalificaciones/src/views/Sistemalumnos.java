@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
-import controller.AlumnosController;
-import tables.ModeloTablaNotas;
+package views;
+import controllers.AlumnosController;
+import modeloTabla.ModeloTablaNotas;
 import javax.swing.JOptionPane;
 
 /**

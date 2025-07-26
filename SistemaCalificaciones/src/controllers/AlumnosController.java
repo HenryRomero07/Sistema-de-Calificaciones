@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package controllers;
 
 import utiles.Utilidades;
 public class AlumnosController {
     private Utilidades util = new Utilidades();
-    private String archivo = "src/data/notas_estudiantes.txt";
-       private String archivo_alumnos = "src/data/Notas_alumnos.txt";
+    private String archivo = "notas_estudiantes";
+       private String archivo_alumnos = "Notas_alumnos";
         public boolean guardar(String Cedula, String Nombres, String Apellidos, String Telefono, String Correo, String Curso, String [] Materias){
             String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\t" + Materias + "\n";
             try {
-                util.save(data,"src/data/Notas_alumnos.txt");
+                util.save(data,"Notas_alumnos");
                 return true;
             } catch (Exception e){
                 System.out.println("Error al guardar estudiante: " + e);
