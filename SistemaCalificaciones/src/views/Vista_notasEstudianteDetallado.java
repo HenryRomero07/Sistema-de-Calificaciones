@@ -1,6 +1,6 @@
 package views;
 
-import controllers.notasController;
+import controllers.NotasController;
 import modeloTabla.mt_notasEstudiante;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Vista_notasEstudianteDetallado extends javax.swing.JDialog {
 private mt_notasEstudiante mt = new mt_notasEstudiante();
-private notasController nc = new notasController();
+private NotasController nc = new NotasController();
     /**
      * Creates new form Vista_estudiante
      */

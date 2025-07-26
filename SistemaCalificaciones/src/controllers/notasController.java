@@ -1,15 +1,16 @@
 package controllers;
 
 import java.io.IOException;
+import utiles.Utilidades;
 
 /**
  *
  * @author Usuario iTC
  */
-public class notasController {
+public class NotasController {
 
     private Utilidades u = new Utilidades();
-    private String file_name = "notas.txt";
+    private String file_name = "Notas";
 
     public String[][] relistar() throws IOException {
         String[][] allData = u.listAll(file_name);
@@ -61,7 +62,18 @@ public class notasController {
             System.out.println("Error en listar " + e);
             return null;
         }
+    }
+     public Float Calcular_promedio(float Nota1, float Nota2, float Nota3) {
+        if (validacion(Nota1) && validacion(Nota2) && validacion(Nota3)) {
+            float Notafinal = (Nota1 + Nota2 + Nota3) / 3;
+            return Notafinal;
+        } else {
+            return null;
+        }
+    }
 
+    public boolean validacion(float nota) {
+        return nota >= 0 && nota <= 10;
     }
 
 }

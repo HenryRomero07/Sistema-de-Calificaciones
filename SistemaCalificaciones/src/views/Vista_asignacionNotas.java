@@ -1,14 +1,10 @@
 package views;
 
-import controllers.Utilidades;
-import controllers.notasController;
+import controllers.NotasController;
 import modeloTabla.mt_asignacion;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,8 +13,7 @@ import javax.swing.JOptionPane;
 public class Vista_asignacionNotas extends javax.swing.JDialog {
 
     private mt_asignacion mt = new mt_asignacion();
-    private notasController nc = new notasController();
-    private Utilidades u = new Utilidades();
+    private NotasController nc = new NotasController();
 
     /**
      * Creates new form Vista_notas

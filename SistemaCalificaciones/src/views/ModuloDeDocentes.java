@@ -20,9 +20,6 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     ModeloTabla mlt = new ModeloTabla();
     DocenteController controlador = new DocenteController();
 
-    /**
-     * Creates new form ModuloDeDocentes
-     */
     public ModuloDeDocentes(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
@@ -37,7 +34,6 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
                     jLabelNombreMateria.setText(materiaSeleccionada);
                     try {
                         cargarTablaPorMateria(materiaSeleccionada);
-
                     } catch (IOException ex) {
                         Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -46,20 +42,19 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         }
     }
 
-       private void cargarTabla() throws IOException {
+    private void cargarTabla() throws IOException {
         String materia = "Matematicas";
         mlt.setData(controlador.listarPorMateria(materia));
         jTable2.setModel(mlt);
         jTable2.updateUI();
     }
-    
-    
+
     private void cargarTablaPorMateria(String materia) throws IOException {
-    String[][] data = controlador.listarPorMateria(materia); 
-    mlt.setData(data);
-    jTable2.setModel(mlt);
-    jTable2.updateUI();
-}
+        String[][] data = controlador.listarPorMateria(materia);
+        mlt.setData(data);
+        jTable2.setModel(mlt);
+        jTable2.updateUI();
+    }
     
 
     /**

@@ -6,17 +6,21 @@ package views;
 
 import javax.swing.JOptionPane;
 import controllers.ARadministrador;
+import controllers.AlumnosController;
 import controllers.ControllerLogin;
+import controllers.DocenteController;
 
 /**
  *
  * @author franz
  */
 public class Login extends javax.swing.JDialog {
-    /*est controller estudiantes*/
-    /*doc controller docentes*/
+    
     private ControllerLogin ver = new ControllerLogin();
     private ARadministrador adm = new ARadministrador();
+    private DocenteController doc = new DocenteController();
+    private AlumnosController est = new AlumnosController();
+            
 
     /**
      * Creates new form Login
@@ -40,16 +44,16 @@ public class Login extends javax.swing.JDialog {
                     new PaguinaAdministrador().setVisible(true);
                     dispose();
                 } 
-                String[] docen = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de docentes*/);
+                String[] docen = ver.verificarCedula(data[0], doc.listar());
                 if (docen!=null) {
                     JOptionPane.showMessageDialog(null, "Bienvenido docente: "+docen[3]+","+docen[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
-                    //new ModuloDeDocentes(new javax.swing.JFrame(), true).setVisible(true);
+                    
                     dispose();
                 } 
-                String[] estud = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de estudiantes*/);
+                String[] estud = ver.verificarCedula(data[0], est.listar());
                 if (estud!=null) {
                     JOptionPane.showMessageDialog(null, "Bienvenido estudeiante: "+estud[3]+","+estud[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
-                    //new Sistemalumnos(new javax.swing.JFrame(), true).setVisible(true);
+                    new Sistemalumnos(new javax.swing.JFrame(), true).setVisible(true);
                     dispose();
                 }
             } else {

@@ -12,6 +12,13 @@ import javax.swing.JOptionPane;
  * @author Usuario iTC
  */
 public class Sistemalumnos extends javax.swing.JDialog {
+    
+    public Sistemalumnos(java.awt.Frame parent, boolean modal) {
+        super (parent, modal);
+        initComponents();
+        cargarDatos();
+    }
+
     private double parseNota(String valor) {
     if (valor == null || valor.trim().isEmpty()) {
         return 0.0;
@@ -53,12 +60,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
     /**
      * Creates new form Sistemalumnos
      */
-    public Sistemalumnos(java.awt.Frame parent, boolean modal) {
-        super (parent, modal);
-        initComponents();
-        cargarDatos();
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
