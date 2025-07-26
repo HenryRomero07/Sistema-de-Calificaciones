@@ -35,19 +35,22 @@ public class Login extends javax.swing.JDialog {
             String[] data = ver.verificarcontraseña(txtcorreo.getText(), String.valueOf(txtcontraseña.getPassword()));
             if (data != null) {
                 String[] admin = ver.verificarCedula(data[0], adm.listar());
-                String[] docen = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de docentes*/);
-                String[] estud = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de estudiantes*/);
                 if (admin != null) {
                     JOptionPane.showMessageDialog(null, "Bienvenido administrador: "+admin[3]+","+admin[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                     new PaguinaAdministrador().setVisible(true);
                     dispose();
-                } else if (docen!=null) {
-                    dispose();
+                } 
+                String[] docen = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de docentes*/);
+                if (docen!=null) {
                     JOptionPane.showMessageDialog(null, "Bienvenido docente: "+docen[3]+","+docen[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
-                } else if (estud!=null) {
-                    JOptionPane.showMessageDialog(null, "Bienvenido estudeiante: "+estud[3]+","+estud[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
+                    //new ModuloDeDocentes(new javax.swing.JFrame(), true).setVisible(true);
                     dispose();
-                    System.out.println("ingreso estudiante");
+                } 
+                String[] estud = ver.verificarCedula(data[0], adm.listar()/*cambiar a listar de estudiantes*/);
+                if (estud!=null) {
+                    JOptionPane.showMessageDialog(null, "Bienvenido estudeiante: "+estud[3]+","+estud[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
+                    //new Sistemalumnos(new javax.swing.JFrame(), true).setVisible(true);
+                    dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Correo o contraseña incorectos", "Error", JOptionPane.ERROR_MESSAGE);
