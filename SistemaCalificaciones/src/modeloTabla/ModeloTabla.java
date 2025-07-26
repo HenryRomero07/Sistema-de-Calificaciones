@@ -1,5 +1,5 @@
 
-package Tablas;
+package modeloTabla;
 
 import javax.swing.table.AbstractTableModel;
 

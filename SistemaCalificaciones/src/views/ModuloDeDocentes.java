@@ -4,7 +4,7 @@
  */
 package views;
 
-import Tablas.ModeloTabla;
+import modeloTabla.ModeloTabla;
 import controllers.DocenteController;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -26,8 +26,6 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     public ModuloDeDocentes(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
-        
-//        jLabelNombreDocente.setText(nombreDocente);
         cargarTabla();
         
         JButton[] botonesMaterias = {btnMateria1, btnMateria2, btnMateria3, btnMateria4, btnMateria5};
@@ -39,7 +37,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
                     jLabelNombreMateria.setText(materiaSeleccionada);
                     try {
                         cargarTablaPorMateria(materiaSeleccionada);
-//                        cargarEstudiantesPorMateria(materiaSeleccionada);
+
                     } catch (IOException ex) {
                         Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -63,14 +61,6 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     jTable2.updateUI();
 }
     
-//    private void cargarEstudiantesPorMateria(String materia) throws IOException {
-//    String[][] data = controlador.listarPorMateria(materia); 
-//    String[] estudiantes = new String[data.length];
-//
-//    for (int i = 0; i < data.length; i++) {
-//        estudiantes[i] = data[i][1]; 
-//    }
-//}
 
     /**
      * This method is called from within the constructor to initialize the form.
