@@ -185,8 +185,12 @@ public class MateriasVistas extends javax.swing.JDialog {
         String resultado = controlador.agregarMaterias(seleccionadas);
         txtResultado.setText(resultado);
         if (!resultado.equals("No se pueden repetir materias.\n")) {
-            enviar();
-            dispose();
+            int confirmacion = JOptionPane.showConfirmDialog(null, "Desea guardar?", "Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(confirmacion);
+            if (confirmacion == 0) {
+                enviar();
+                dispose();
+            }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

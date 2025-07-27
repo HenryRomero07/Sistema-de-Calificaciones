@@ -21,7 +21,7 @@ public class AlumnosController {
             util.save(data, archivo_alumnos);
             return true;
         } catch (Exception e) {
-            System.out.println("Error al guardar estudiante: " + e);
+            System.out.println("e");
             return false;
         }
     }
