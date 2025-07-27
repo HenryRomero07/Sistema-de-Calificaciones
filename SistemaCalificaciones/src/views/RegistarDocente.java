@@ -66,10 +66,14 @@ public class RegistarDocente extends javax.swing.JDialog {
                         if (log.validaridentificacion(String.valueOf(cbxtipo.getSelectedItem()), txtIdentificacion.getText())) {
                             if (log.verificarTelefonoValido(txtTelefono.getText())) {
                                 if (log.CoincidirContraseña(String.valueOf(txtcontrasena1.getPassword()), String.valueOf(txtcontrasenaval.getPassword()))) {
+                                    String[] materias = new String[5];
+                                    for(int i = 0; i < 5; i++){
+                                        materias[i] = materia.getMaterias()[i];
+                                    }         
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
                                             String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&& doc.guardar(txtIdentificacion.getText(), 
-                                                    TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(), 
-                                                    txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), "mmmm", "mmmm", "mmmm", "mmm", "mmm")) {
+                                                    TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(),txtTelefono.getText(), 
+                                                    txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), materias[0], materias[1], materias[2], materias[3], materias[4])) {
                                         Limpiar();
                                         JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                                     } else {
@@ -249,6 +253,11 @@ public class RegistarDocente extends javax.swing.JDialog {
         jButton1.setBounds(410, 170, 80, 25);
 
         jButton2.setText("Asignar Materias");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton2);
         jButton2.setBounds(500, 170, 130, 25);
 
@@ -292,6 +301,11 @@ public class RegistarDocente extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new MateriasVistas(new javax.swing.JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

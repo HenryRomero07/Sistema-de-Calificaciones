@@ -42,10 +42,10 @@ public class ControllerLogin {
 //verifica que el correo no exista
     public boolean verifiCorreo(String correo) {
         boolean usuar = false;
-        String[][] contrasenas = listar();
-        if (contrasenas != null) {
-            for (int i = 0; i < contrasenas.length; i++) {
-                if (contrasenas[i][1].equals(correo)) {
+        String[][] correos = listar();
+        if (correos != null) {
+            for (int i = 0; i < correos.length; i++) {
+                if (correos[i][1].equals(correo)) {
                     usuar = true;
                     break;
                 }
@@ -56,10 +56,10 @@ public class ControllerLogin {
 //verifica que el telefono no exista
     public boolean verificarTelefono(String telefono) {
         boolean usuar = false;
-        String[][] contrasenas = listar();
-        if (contrasenas != null) {
-            for (int i = 0; i < contrasenas.length; i++) {
-                if (contrasenas[i][3].equals(telefono)) {
+        String[][] telefonos = listar();
+        if (telefonos != null) {
+            for (int i = 0; i < telefonos.length; i++) {
+                if (telefonos[i][3].equals(telefono)) {
                     usuar = true;
                     break;
                 }

@@ -17,8 +17,8 @@ public class DocenteController {
     String name_file = "estudiantes";
     String name_fileVerificador = "Docentes";
 
-    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Correo, Curso Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
-        String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Correo + "\t" + Grado + "\t" + materia1
+    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos,String telefono, String Correo, Curso Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
+        String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + telefono+"\t" + Correo + "\t" + Grado + "\t" + materia1
                 + "\t" + materia2 + "\t" + materia3 + "\t" + materia4 + "\t" + materia5 + "\n";
 
         try {
