@@ -6,14 +6,16 @@ package modeloTabla;
 
 import javax.swing.table.AbstractTableModel;
 
-public class ModeloTablaNotas extends AbstractTableModel{
-    private String [][] datos;
-    private String[] columnas = {"MATERIA","UNIDAD 1", "UNIDAD 2", "UNIDAD 3", "PROMEDIO"};
-    
-    public ModeloTablaNotas (String [][] datos){
+public class ModeloTablaNotas extends AbstractTableModel {
+
+    private String[][] datos;
+    private String[] columnas = {"MATERIA", "UNIDAD 1", "UNIDAD 2", "UNIDAD 3", "PROMEDIO"};
+
+    public ModeloTablaNotas(String[][] datos) {
         this.datos = datos;
     }
-         private double parseNota(String valor) {
+
+    private double parseNota(String valor) {
         if (valor == null || valor.trim().isEmpty()) {
             return 0.0;
         }
@@ -23,9 +25,10 @@ public class ModeloTablaNotas extends AbstractTableModel{
             return 0.0;
         }
     }
+
     @Override
     public int getRowCount() {
-       return datos.length;
+        return datos.length;
     }
 
     @Override
@@ -36,13 +39,13 @@ public class ModeloTablaNotas extends AbstractTableModel{
     @Override
     public Object getValueAt(int fila, int columna) {
         try {
-            double n1 = parseNota(datos[fila][5]);
-            double n2 = parseNota(datos[fila][6]);
-            double n3 = parseNota(datos[fila][7]);
-            
-            switch (columna){
+            double n1 = parseNota(datos[fila][1]);
+            double n2 = parseNota(datos[fila][2]);
+            double n3 = parseNota(datos[fila][3]);
+
+            switch (columna) {
                 case 0:
-                    return datos [fila][4];
+                    return datos[fila][0];
                 case 1:
                     return n1;
                 case 2:
@@ -50,18 +53,19 @@ public class ModeloTablaNotas extends AbstractTableModel{
                 case 3:
                     return n3;
                 case 4:
-                    return String.format("%.2f",(n1 + n2 + n3) / 3);
+                    return String.format("%.2f", (n1 + n2 + n3) / 3);
                 default:
                     return "";
-             
+
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
+
     @Override
     public String getColumnName(int column) {
-       return columnas[column];
+        return columnas[column];
     }
 
 }

@@ -12,6 +12,12 @@ import javax.swing.JOptionPane;
  * @author Usuario iTC
  */
 public class Sistemalumnos extends javax.swing.JDialog {
+    public Sistemalumnos(java.awt.Frame parent, boolean modal) {
+        super (parent, modal);
+        initComponents();
+        cargarDatos();
+    }
+
     private double parseNota(String valor) {
     if (valor == null || valor.trim().isEmpty()) {
         return 0.0;
@@ -32,33 +38,40 @@ public class Sistemalumnos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se encontraron datos para el correo: " + correoSimulado);
             return;
         }
-                
-        estudiante.setText(datos[0][1]);
+       
+        String cedula = datos [0][0];
+        String [][] datosNotas = ac.buscarNotasPorCedula(cedula);
+        if(datosNotas.length == 0){
+            JOptionPane.showMessageDialog(this, "No se encontraron notas para el alumno con cédula: " + cedula);
+            return;
+        }
+        estudiante.setText(datos[0][1] + " " + datos [0][2]);
         id.setText(datos[0][0]);
-        correo.setText(datos[0][2]);
-        jLabel6.setText(datos[0][3]);
-        jTable2.setModel(new ModeloTablaNotas(datos));
+        correo.setText(datos[0][4]);
+        jLabel6.setText(datos[0][5]);
+        
+        int filas = datosNotas.length;
+        String [][] notasParaTabla = new String [filas][4];
+        for (int i = 0; i < filas; i++){
+            notasParaTabla[i][0] = datosNotas[i][0];
+            notasParaTabla[i][1] = datosNotas[i][1];
+            notasParaTabla[i][2] = datosNotas[i][2];
+            notasParaTabla[i][3] = datosNotas[i][3];
+            
+        }
+        jTable2.setModel(new ModeloTablaNotas(notasParaTabla));
         
         double suma = 0;
-        for (String [] fila : datos){
-            double n1 = parseNota(fila[5]);
-            double n2 = parseNota(fila[6]);
-            double n3 = parseNota(fila[7]);
+        for (String [] fila : datosNotas){
+            double n1 = parseNota(fila[1]);
+            double n2 = parseNota(fila[2]);
+            double n3 = parseNota(fila[3]);
             suma += (n1 + n2 + n3) / 3;
             
         }
-        double promedioFinal = suma / datos.length;
+        double promedioFinal = suma / notasParaTabla.length;
         total2.setText(String.format("%.2f", promedioFinal));
     }
-    /**
-     * Creates new form Sistemalumnos
-     */
-    public Sistemalumnos(java.awt.Frame parent, boolean modal) {
-        super (parent, modal);
-        initComponents();
-        cargarDatos();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,22 +112,22 @@ public class Sistemalumnos extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SISTEMA DE CALIFICACIONES ");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(80, 10, 450, 30);
+        jLabel1.setBounds(60, 10, 450, 30);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel2.setText("Estudiante:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 50, 110, 20);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel3.setText("IDENTIFICACIÓN:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel3.setText("CÉDULA:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 90, 110, 16);
+        jLabel3.setBounds(30, 90, 80, 16);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel4.setText("Correo Electrónico:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(260, 90, 170, 20);
+        jLabel4.setBounds(220, 90, 170, 20);
 
         estudiante.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(estudiante);
@@ -122,23 +135,23 @@ public class Sistemalumnos extends javax.swing.JDialog {
 
         id.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(id);
-        id.setBounds(140, 90, 100, 20);
+        id.setBounds(100, 90, 100, 20);
 
         correo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(correo);
-        correo.setBounds(400, 90, 180, 20);
+        correo.setBounds(360, 90, 190, 20);
 
         jLabel5.setFont(new java.awt.Font("sansserif", 3, 18)); // NOI18N
         jLabel5.setText("Grado:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(370, 50, 80, 24);
+        jLabel5.setBounds(360, 50, 80, 24);
 
         jLabel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(450, 50, 110, 20);
+        jLabel6.setBounds(440, 50, 110, 20);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(30, 20, 600, 130);
+        jPanel1.setBounds(30, 20, 570, 130);
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -156,7 +169,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable2);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(30, 170, 600, 110);
+        jScrollPane2.setBounds(30, 170, 570, 110);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.setLayout(null);
@@ -164,39 +177,39 @@ public class Sistemalumnos extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel8.setText("Resumen:");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(20, 10, 90, 25);
+        jLabel8.setBounds(20, 10, 110, 25);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel9.setText("Materias: ");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(110, 30, 120, 32);
+        jLabel9.setBounds(30, 50, 120, 32);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("5");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(220, 30, 40, 30);
+        jLabel10.setBounds(140, 50, 40, 30);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel11.setText("Promedio Total:");
         jPanel2.add(jLabel11);
-        jLabel11.setBounds(270, 30, 200, 32);
+        jLabel11.setBounds(200, 50, 200, 32);
 
         total2.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         total2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         total2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.add(total2);
-        total2.setBounds(470, 30, 100, 30);
+        total2.setBounds(420, 50, 140, 30);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(30, 290, 600, 80);
+        jPanel2.setBounds(30, 290, 570, 100);
 
         jButton1.setFont(new java.awt.Font("sansserif", 3, 18)); // NOI18N
         jButton1.setText("Detalles");
         getContentPane().add(jButton1);
-        jButton1.setBounds(490, 390, 140, 31);
+        jButton1.setBounds(470, 400, 120, 31);
 
-        setSize(new java.awt.Dimension(668, 484));
+        setSize(new java.awt.Dimension(628, 493));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
