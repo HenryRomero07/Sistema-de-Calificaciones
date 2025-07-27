@@ -9,8 +9,12 @@ import javax.swing.table.AbstractTableModel;
 public class mt_notasEstudiante extends AbstractTableModel {
 
     private String data[][];
-    private String[] header = {"Materia", "ACG1","ACI1","Examen1","ACG2","ACI2","Examen2","ACG3","ACI3","Examen3"};
-   
+    private String[] header = {"Materia", "ACG1", "ACI1", "Examen1", "ACG2", "ACI2", "Examen2", "ACG3", "ACI3", "Examen3"};
+
+    public mt_notasEstudiante() {
+        this.data = new String[0][0];
+    }
+
     public String[][] getData() {
         return data;
     }

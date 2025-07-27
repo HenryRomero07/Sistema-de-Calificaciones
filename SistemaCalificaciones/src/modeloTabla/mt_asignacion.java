@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 public class mt_asignacion extends AbstractTableModel {
 
     private String data[][];
-    private String header[] = {"Nombres", "ACG1","ACI1","Examen1","ACG2","ACI2","Examen2","ACG3","ACI3","Examen3"};
+    private String header[] = {"Nombres","Apellidos", "ACG1","ACI1","Examen1","ACG2","ACI2","Examen2","ACG3","ACI3","Examen3"};
 
    
     public String[][] getData() {

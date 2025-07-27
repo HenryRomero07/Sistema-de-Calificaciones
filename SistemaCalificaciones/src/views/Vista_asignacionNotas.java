@@ -1,10 +1,12 @@
 package views;
 
-import controllers.NotasController;
+
+import controllers.notasController;
 import modeloTabla.mt_asignacion;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -14,7 +16,8 @@ import java.util.logging.Logger;
 public class Vista_asignacionNotas extends javax.swing.JDialog {
 
     private mt_asignacion mt = new mt_asignacion();
-    private NotasController nc = new NotasController();
+    private notasController nc = new notasController();
+    private Utilidades u = new Utilidades();
 
     /**
      * Creates new form Vista_notas
@@ -27,31 +30,36 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     }
 
     public void cargarTabla() throws IOException {
-        mt.setData(nc.relistar());
+        String materia = jLabel3.getText();
+        mt.setData(nc.listarPorMateria(materia));
         tabla.setModel(mt);
         tabla.updateUI();
     }
-
+    
     public void actualizarTabla() {
-        int row = mt.getRowCount();
-        int column = mt.getColumnCount();
-        String[][] nuevosDatos = new String[row][column];
-        StringBuilder archivoActualizado = new StringBuilder();
-        for (int i = row; i < row; i++) {
-            for (int j = column; j < column; j++) {
-                Object valor = tabla.getValueAt(row, column);
-                nuevosDatos[i][j] = (valor != null) ? valor.toString() : "0.0";
-                archivoActualizado.append(nuevosDatos[i][j]);
-                if (j < column - 1) {
-                    archivoActualizado.append("\t");
+        int filas = tabla.getRowCount();
+        try {
+            for (int i = 0; i < filas; i++) {
+                String nuevoNombre = (String) tabla.getValueAt(i, 0);
+
+                String[] nuevasNotas = new String[9];
+                for (int j = 0; j < 9; j++) {
+                    Object val = tabla.getValueAt(i, j + 1);
+                    nuevasNotas[j] = val != null ? val.toString() : "0.0";
                 }
 
+                boolean exito = nc.actualizarNombreYNotas(i, nuevoNombre, nuevasNotas);
+                if (!exito) {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar fila " + i);
+                    return;
+                }
             }
-            archivoActualizado.append("\n");
+            JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
+            cargarTabla();  
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al guardar archivo: " + ex.getMessage());
         }
-        tabla.setModel(mt);
-        mt.setData(nuevosDatos);
-        //metodo actulizar data
     }
 
     /**
@@ -170,7 +178,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-//actualizarTabla();
+  actualizarTabla();
     }//GEN-LAST:event_actualizarActionPerformed
 
     /**
