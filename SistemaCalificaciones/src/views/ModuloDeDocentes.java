@@ -97,7 +97,8 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabelNombreMateria = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cerrar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnMateria1 = new javax.swing.JButton();
@@ -131,7 +132,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
         jLabelNombreDocente.setText("Ing. Jeam Romero");
         jPanel2.add(jLabelNombreDocente);
-        jLabelNombreDocente.setBounds(80, 40, 150, 16);
+        jLabelNombreDocente.setBounds(80, 40, 150, 15);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(20, 20, 880, 70);
@@ -164,14 +165,23 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jPanel3.add(jLabelNombreMateria);
         jLabelNombreMateria.setBounds(30, 20, 110, 21);
 
-        jButton1.setText("Asignar Nota");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cerrar.setText("Cerrar");
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cerrarActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
-        jButton1.setBounds(710, 20, 130, 23);
+        jPanel3.add(cerrar);
+        cerrar.setBounds(570, 20, 130, 25);
+
+        jButton2.setText("Asignar Nota");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2);
+        jButton2.setBounds(710, 20, 130, 25);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(20, 190, 880, 280);
@@ -256,13 +266,9 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMateria2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            new Vista_asignacionNotas(new javax.swing.JFrame(), true).setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+        dispose();
+    }//GEN-LAST:event_cerrarActionPerformed
 
     private void btnMateria4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria4ActionPerformed
         // TODO add your handling code here:
@@ -275,6 +281,15 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     private void btnMateria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMateria5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            new Vista_asignacionNotas(new javax.swing.JFrame(), true).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,7 +344,8 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     private javax.swing.JButton btnMateria3;
     private javax.swing.JButton btnMateria4;
     private javax.swing.JButton btnMateria5;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cerrar;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

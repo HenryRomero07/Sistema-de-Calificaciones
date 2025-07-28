@@ -102,6 +102,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         total2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alumnos");
@@ -207,26 +208,41 @@ public class Sistemalumnos extends javax.swing.JDialog {
         jPanel2.setBounds(30, 290, 570, 100);
 
         jButton1.setFont(new java.awt.Font("sansserif", 3, 18)); // NOI18N
-        jButton1.setText("Detalles");
+        jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(470, 400, 120, 34);
+        jButton1.setBounds(330, 400, 120, 34);
+
+        jButton2.setFont(new java.awt.Font("sansserif", 3, 18)); // NOI18N
+        jButton2.setText("Detalles");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(470, 400, 120, 34);
 
         setSize(new java.awt.Dimension(628, 493));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
         try {
             new Vista_notasEstudianteDetallado(new javax.swing.JFrame(), true).setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Sistemalumnos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +268,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
     private javax.swing.JLabel estudiante;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
