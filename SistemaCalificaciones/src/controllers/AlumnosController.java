@@ -11,7 +11,6 @@ import utiles.Utilidades;
 public class AlumnosController {
 
     private Utilidades util = new Utilidades();
-            try {
     private notasController nota = new notasController();
     private String name_file = "estudiantes";
 
