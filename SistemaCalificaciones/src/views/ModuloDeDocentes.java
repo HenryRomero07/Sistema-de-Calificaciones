@@ -13,49 +13,64 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Usuario
+ * @author HenryRomero
  */
 public class ModuloDeDocentes extends javax.swing.JDialog {
 
     ModeloTabla mlt = new ModeloTabla();
     DocenteController controlador = new DocenteController();
-
+    String correoDocente = "henryromero@unl.edu.ec";
+    /**
+     * Creates new form ModuloDeDocentes
+     */
     public ModuloDeDocentes(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
         cargarTabla();
+        asignar();
+    }
+
+    private void asignar() throws IOException {
+        String[] materias = controlador.obtenerMateriasDocente(correoDocente);
+
+        btnMateria1.setText(materias[0]);
+        btnMateria2.setText(materias[1]);
+        btnMateria3.setText(materias[2]);
+        btnMateria4.setText(materias[3]);
+        btnMateria5.setText(materias[4]);
         
         JButton[] botonesMaterias = {btnMateria1, btnMateria2, btnMateria3, btnMateria4, btnMateria5};
-
+        
         for (JButton boton : botonesMaterias) {
             boton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String materiaSeleccionada = boton.getText();
-                    jLabelNombreMateria.setText(materiaSeleccionada);
                     try {
-                        cargarTablaPorMateria(materiaSeleccionada);
+                        String materiaSeleccionada = boton.getText();
+                        jLabelNombreMateria.setText(materiaSeleccionada);
+                        cargarTablaPorMateria(materiaSeleccionada, correoDocente);
                     } catch (IOException ex) {
                         Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
                 }
             });
         }
+
     }
 
     private void cargarTabla() throws IOException {
         String materia = "Matematicas";
-        mlt.setData(controlador.listarPorMateria(materia));
+        mlt.setData(controlador.listarPorMateria(materia, correoDocente));
         jTable2.setModel(mlt);
         jTable2.updateUI();
     }
 
-    private void cargarTablaPorMateria(String materia) throws IOException {
-        String[][] data = controlador.listarPorMateria(materia);
+    private void cargarTablaPorMateria(String materia, String correoDocente) throws IOException {
+        String[][] data = controlador.listarPorMateria(materia, correoDocente);
         mlt.setData(data);
         jTable2.setModel(mlt);
         jTable2.updateUI();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
