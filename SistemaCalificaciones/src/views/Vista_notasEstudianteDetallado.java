@@ -23,18 +23,18 @@ private notasController nc = new notasController();
         initComponents();
         cargarTabla();
     }
- public void cargarTabla() throws IOException {
-    String ced = cedula.getText();
-    String[][] datos = nc.relistarEstudiante(ced); 
 
-    if (datos == null) {
-        JOptionPane.showMessageDialog(this, "No se encontraro el usuario ");
-        return;
+    public void cargarTabla() throws IOException {
+        String[][] datos = nc.relistarEstudiante("0926687317");
+
+        if (datos == null) {
+            JOptionPane.showMessageDialog(this, "No se encontraro el usuario ");
+            return;
+        }
+
+        mt.setData(datos);
+        tabla.setModel(mt);
     }
-
-    mt.setData(datos);  
-    tabla.setModel(mt); 
-}
 
 
     /**

@@ -10,6 +10,10 @@ import enums.TipoIdentificacion;
 import javax.swing.JOptionPane;
 import modeloTabla.ModeloRegistroEstudiante;
 import controllers.ControllerLogin;
+import controllers.notasController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +23,7 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
     private ControllerLogin log = new ControllerLogin();
     private ModeloRegistroEstudiante mre = new ModeloRegistroEstudiante();
     private AlumnosController est = new AlumnosController();
+    private notasController not = new notasController();
     /**
      * Creates new form RegistrarEstudiante
      */
@@ -55,7 +60,7 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
         TablasEst.setModel(mre);
         TablasEst.updateUI();
     }
-    private void RegistroEst() {
+    private void RegistroEst() throws IOException {
         if (txtApellidos.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtIdentificacion.getText().isEmpty()
                 || txtNombres.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtcontrasena1.getPassword().length==0 || txtcontrasenaval.getPassword().length==0) {
             JOptionPane.showMessageDialog(null, "LLene todos los datos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -68,7 +73,8 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
                                 if (log.CoincidirContraseña(String.valueOf(txtcontrasena1.getPassword()), String.valueOf(txtcontrasenaval.getPassword()))) {
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
                                             String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText()) && est.guardar(txtIdentificacion.getText(), TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()),
-                                                    txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()))) {
+                                                    txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(), txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()))&&not.guardar(txtIdentificacion.getText(), 
+                                                            txtNombres.getText(), txtApellidos.getText(), String.valueOf(cbxcurso.getSelectedItem().toString()))) {
                                         Limpiar();
                                         JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                                     } else {
@@ -294,8 +300,12 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        RegistroEst();
+        try {
+            // TODO add your handling code here:
+            RegistroEst();
+        } catch (IOException ex) {
+            Logger.getLogger(RegistrarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

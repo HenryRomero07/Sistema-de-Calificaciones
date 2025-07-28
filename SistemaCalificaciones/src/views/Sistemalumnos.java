@@ -47,7 +47,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se encontraron notas para el alumno con cédula: " + cedula);
             return;
         }
-        estudiante.setText(datos[1] + " " + datos[2]);
+        estudiante.setText(datos[2]);
         id.setText(datos[0]);
         correo.setText(datos[5]);
         jLabel6.setText(datos[6]);
@@ -222,7 +222,6 @@ public class Sistemalumnos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
             new Vista_notasEstudianteDetallado(new javax.swing.JFrame(), true);
         } catch (IOException ex) {
             Logger.getLogger(Sistemalumnos.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,38 +14,32 @@ public class notasController {
     private String file_name = "notas";
     private String name_fileVerificador = "Docentes";
     //Metodo para duplicar por materia 
-    public void guardar(String Cedula, String Nombres, String Apellidos, String Materia, String Grado) throws IOException {
-
-        String[] materia = new String[5];
-        String[][] docentes = u.listAll(name_fileVerificador);//modulo de docentes
-
-        for (int i = 0; i < docentes.length; i++) {
-            if (docentes[i][6].equalsIgnoreCase(Grado)) {
-                materia[0] = docentes[i][7];
-                materia[1] = docentes[i][8];
-                materia[2] = docentes[i][9];
-                materia[3] = docentes[i][10];
-                materia[4] = docentes[i][11];
+    public Boolean guardar(String Cedula, String Nombres, String Apellidos, String Grado) throws IOException {
+        boolean band = false;
+        try {
+            String[] materia = new String[5];
+            String[][] docentes = u.listAll(name_fileVerificador);//modulo de docentes
+            for (int i = 0; i < docentes.length; i++) {
+                if (docentes[i][6].equalsIgnoreCase(Grado)) {
+                    materia[0] = docentes[i][7];
+                    materia[1] = docentes[i][8];
+                    materia[2] = docentes[i][9];
+                    materia[3] = docentes[i][10];
+                    materia[4] = docentes[i][11];
+                }
             }
-        }
-
-        for (int i = 0; i < materia.length; i++) {
-
-            Materia = materia[i];
-
-            String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Materia + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0"
-                    + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\n";
-
-            try {
+            for (int i = 0; i < materia.length; i++) {
+                String Materia = materia[i];
+                String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Materia + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0"
+                        + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\t" + "0.0" + "\n";
                 u.save(data, file_name);
-
-            } catch (Exception e) {
-                System.out.println("Error al guardar " + e);
-
+                band = true;
             }
-
+        } catch (Exception e) {
+            System.out.println("Error al guardar " + e);
+            band = false;
         }
-
+        return band;
     }
 
     public String[][] listar() {
