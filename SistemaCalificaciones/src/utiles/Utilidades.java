@@ -68,5 +68,10 @@ public class Utilidades {
         br.close();
         return line.split("\t").length;
     }
+    public void actualizar(String text, String name_file) throws IOException {
+        FileWriter file = new FileWriter("src" + File.separatorChar + path + File.separatorChar + name_file);
+        file.write(text);
+        file.close();
+    }
 
 }

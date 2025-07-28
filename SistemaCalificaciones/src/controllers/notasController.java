@@ -16,7 +16,7 @@ public class notasController {
     public void guardar(String Cedula, String Nombres, String Apellidos, String Materia, String Grado) throws IOException {
 
         String[] materia = new String[5];
-        String[][] docentes = u.listAll("Docentes");
+        String[][] docentes = u.listAll("Docentes");//modulo de docentes
 
         for (int i = 0; i < docentes.length; i++) {
             if (docentes[i][6].equalsIgnoreCase(Grado)) {
@@ -46,6 +46,14 @@ public class notasController {
         }
 
     }
+     public String [][] listar (){
+            try {
+                return u.listAll(file_name);
+            } catch (Exception e) {
+                System.out.println("Error en listar: " + e);
+                return new String [0][];
+            }
+        }
 
     public Float Calcular_promedio(float Nota1, float Nota2, float Nota3) {
         if (validacion(Nota1) && validacion(Nota2) && validacion(Nota3)) {
@@ -61,7 +69,7 @@ public class notasController {
     }
 
     public boolean actualizarNombreYNotas(int filaActualizar, String nuevoNombre, String[] nuevasNotas) throws IOException {
-        String[][] allData = u.listAll(file_name);
+        String[][] allData = u.listAll(file_name);// cambiar por listar
         if (filaActualizar < 0 || filaActualizar >= allData.length) {
             System.out.println("Fila inválida");
             return false;
@@ -92,7 +100,7 @@ public class notasController {
     }
 
     public String[][] relistar() throws IOException {
-        String[][] allData = u.listAll(file_name);
+        String[][] allData = u.listAll(file_name);//listar
         String[][] filteredData = new String[allData.length][11]; // nombre + 9 notas
 
         int filaDestino = 0;
@@ -149,7 +157,7 @@ public class notasController {
 }
 
     public String[][] listarPorMateria(String materia) throws IOException {
-        String[][] allData = u.listAll(file_name);
+        String[][] allData = u.listAll(file_name);//listar
         int count = 0;
 
         for (String[] row : allData) {

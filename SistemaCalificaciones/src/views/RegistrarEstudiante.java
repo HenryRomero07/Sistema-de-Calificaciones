@@ -69,7 +69,7 @@ public class RegistrarEstudiante extends javax.swing.JDialog {
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
                                             String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&&est.guardar(txtIdentificacion.getText(), 
                                                     TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(),
-                                                    txtTelefono.getText(), txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), "---")) {
+                                                    txtTelefono.getText(), txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()))) {
                                         Limpiar();
                                         JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                                     } else {

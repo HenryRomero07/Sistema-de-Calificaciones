@@ -9,8 +9,8 @@ public class AlumnosController {
     private Utilidades util = new Utilidades();
        private String archivo_alumnos = "Notas_alumnos";
        private String archivo_notas = "asg_notas";
-        public boolean guardar(String Cedula, String Nombres, String Apellidos, String Telefono, String Correo, String Curso, String [][] Materias){
-            String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\t" + Materias + "\n";
+        public boolean guardar(String Cedula, String Nombres, String Apellidos, String Telefono, String Correo, String Curso){
+            String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\n";
             try {
                 util.save(data,"Notas_alumnos");
                 return true;
@@ -29,7 +29,7 @@ public class AlumnosController {
         }
         public String [][] buscarPorcorreo (String Correo){
         try {
-            String [][] todos = util.listAll(archivo_alumnos);
+            String [][] todos = util.listAll(archivo_alumnos);// listar de la misma 
             
             int count = 0;
             for (int i = 0; i < todos.length; i++){
@@ -51,8 +51,8 @@ public class AlumnosController {
         }
     }
         public String [][] buscarNotasPorCedula (String Cedula){
-            try {
-                String [][] Notas = util.listAll(archivo_notas);
+            try {// agragar arreglo
+                String [][] Notas = util.listAll(archivo_notas);//modulo de notas
                 int count = 0;
                 for(int i = 0; i < Notas.length; i++){
                     if(Notas[i][0].equalsIgnoreCase(Cedula)){

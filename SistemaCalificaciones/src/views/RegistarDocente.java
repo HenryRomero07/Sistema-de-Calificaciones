@@ -71,7 +71,7 @@ public class RegistarDocente extends javax.swing.JDialog {
                                     String[] materias = new String[5];
                                     for(int i = 0; i < 5; i++){
                                         materias[i] = materia.getMaterias()[i];
-                                    }         
+                                    }   
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
                                             String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&& doc.guardar(txtIdentificacion.getText(), 
                                                     TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(),txtTelefono.getText(), 

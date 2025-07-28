@@ -1,5 +1,7 @@
 package controllers;
 
+import enums.Curso;
+import enums.TipoIdentificacion;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import utiles.Utilidades;
@@ -17,7 +19,7 @@ public class DocenteController {
     String name_file = "estudiantes";
     String name_fileVerificador = "Docentes";
 
-    public boolean guardar(String Cedula, String TipoID, String Nombres, String Apellidos, String Correo, String Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
+    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Correo, Curso Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
         String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Correo + "\t" + Grado + "\t" + materia1
                 + "\t" + materia2 + "\t" + materia3 + "\t" + materia4 + "\t" + materia5 + "\n";
 
@@ -29,11 +31,18 @@ public class DocenteController {
             return false;
         }
     }
-
+    public String [][] listar (){
+            try {
+                return u.listAll(name_fileVerificador);
+            } catch (Exception e) {
+                System.out.println("Error en listar: " + e);
+                return new String [0][];
+            }
+        }
     public String[][] listarEstudiantesPorDocente(String correoDocente) throws IOException {
-        String[][] docentes = u.listAll(name_fileVerificador);
-        String[][] estudiantes = u.listAll(name_file);
-        String[][] notas = u.listAll("notas");
+        String[][] docentes = u.listAll(name_fileVerificador); // modulo de Docentes
+        String[][] estudiantes = u.listAll(name_file); //modulo de Alumnos
+        String[][] notas = u.listAll("notas"); // modulo de chamba
 
         String gradoDocente = null;
 
