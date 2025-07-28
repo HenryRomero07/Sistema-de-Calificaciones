@@ -13,6 +13,7 @@ public class notasController {
     //private DocenteController doc = new DocenteController();
     private String file_name = "notas";
     private String name_fileVerificador = "Docentes";
+
     //Metodo para duplicar por materia 
     public Boolean guardar(String Cedula, String Nombres, String Apellidos, String Grado) throws IOException {
         boolean band = false;
@@ -66,7 +67,6 @@ public class notasController {
 
     public boolean actualizarNombreYNotas(String[] nuevasNotas) throws IOException {
         //cedula apellidos nombres materia notas ....
-        
         String[][] allData = listar();// cambiar por listar
         if (nuevasNotas.length > 0) {
             System.out.println("Fila inválida");
@@ -74,19 +74,17 @@ public class notasController {
         }
         int pos = -1;
         for (int i = 0; i < allData.length; i++) {
-            if(nuevasNotas[0].equalsIgnoreCase(allData[i][0]) && nuevasNotas[3].equalsIgnoreCase(allData[i][3])) {
+            if (nuevasNotas[0].equalsIgnoreCase(allData[i][0]) && nuevasNotas[3].equalsIgnoreCase(allData[i][3])) {
                 pos = i;
                 break;
             }
             //allData[filaActualizar][i] = nuevasNotas[i];
         }
-        
+
         for (int i = 0; i < nuevasNotas.length; i++) {
-            System.out.println("*** ----"+nuevasNotas[i]);
+            System.out.println("*** ----" + nuevasNotas[i]);
             allData[pos][i] = nuevasNotas[i];
         }
-
-        
 
         StringBuilder contenidoNuevo = new StringBuilder();
         for (int i = 0; i < allData.length; i++) {

@@ -165,7 +165,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
         jLabelNombreMateria.setText("Materia 1");
         jLabelNombreMateria.setAutoscrolls(true);
         jPanel3.add(jLabelNombreMateria);
-        jLabelNombreMateria.setBounds(30, 20, 110, 21);
+        jLabelNombreMateria.setBounds(30, 20, 170, 21);
 
         cerrar.setText("Cerrar");
         cerrar.addActionListener(new java.awt.event.ActionListener() {

@@ -29,10 +29,8 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     public void cargarTabla() throws IOException {
         String asignatura = materia.getNotas();
         botonmateria.setText(materia.getNotas());
-        System.out.println(materia.getNotas());
         mt.setData(nc.listarPorMateria(asignatura));
         tabla.setModel(mt);
-        tabla.updateUI();
     }
 
     public void actualizarTabla() {
@@ -42,13 +40,12 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
             System.out.println("xxxx " + filas);
             if (filas >= 0) {
                 String[] nuevasNotas = new String[mt.getData()[0].length];
-
                 for (int i = 0; i < nuevasNotas.length; i++) {
                     System.out.println(mt.getData()[filas][i]);
                     nuevasNotas[i] = mt.getData()[filas][i];
                 }
 
-                boolean exito = nc.actualizarNombreYNotas(filas, nuevasNotas);
+                boolean exito = nc.actualizarNombreYNotas(nuevasNotas);
                 if (!exito) {
                     JOptionPane.showMessageDialog(null, "Error al actualizar fila " + filas);
                     return;

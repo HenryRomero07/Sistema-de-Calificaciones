@@ -32,7 +32,7 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ver.CrearAdministrador();
-        //limpiar();
+        limpiar();
     }
     
     public void inicioSesion() {
