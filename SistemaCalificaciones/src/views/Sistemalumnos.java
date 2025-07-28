@@ -222,7 +222,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            new Vista_notasEstudianteDetallado(new javax.swing.JFrame(), true);
+            new Vista_notasEstudianteDetallado(new javax.swing.JFrame(), true).setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(Sistemalumnos.class.getName()).log(Level.SEVERE, null, ex);
         }

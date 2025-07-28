@@ -25,15 +25,16 @@ private notasController nc = new notasController();
     }
 
     public void cargarTabla() throws IOException {
-        String[][] datos = nc.relistarEstudiante("0926687317");
+        String[][] datos = nc.relistarEstudiante(materia.getEnviar()[0]);
 
         if (datos == null) {
             JOptionPane.showMessageDialog(this, "No se encontraro el usuario ");
             return;
         }
-
+        cedula.setText(materia.getEnviar()[0]);
         mt.setData(datos);
         tabla.setModel(mt);
+        tabla.updateUI();
     }
 
 

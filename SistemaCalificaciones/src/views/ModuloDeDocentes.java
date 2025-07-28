@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -19,7 +21,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     ModeloTabla mlt = new ModeloTabla();
     DocenteController controlador = new DocenteController();
-    String correoDocente = "henryromero@unl.edu.ec";
+    String correoDocente = materia.getEnviar()[5];
     /**
      * Creates new form ModuloDeDocentes
      */
@@ -32,7 +34,11 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void asignar() throws IOException {
         String[] materias = controlador.obtenerMateriasDocente(correoDocente);
-
+        /*String[] materias = new String[5];
+        for(int i = 0;i < 5;i++){
+        materias[i] = materia.getEnviar()[i];
+        }*/
+        
         btnMateria1.setText(materias[0]);
         btnMateria2.setText(materias[1]);
         btnMateria3.setText(materias[2]);
@@ -59,7 +65,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     }
 
     private void cargarTabla() throws IOException {
-        String materia = "Matematicas";
+        String materia = "Artes";
         mlt.setData(controlador.listarPorMateria(materia, correoDocente));
         jTable2.setModel(mlt);
         jTable2.updateUI();

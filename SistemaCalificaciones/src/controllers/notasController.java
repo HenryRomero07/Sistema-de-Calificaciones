@@ -123,20 +123,16 @@ public class notasController {
 
     public String[][] relistarEstudiante(String cedula) throws IOException {
         String[][] allData = listar();
-
         int count = 0;
         for (int i = 0; i < allData.length; i++) {
             if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
                 count++;
             }
         }
-
         if (count == 0) {
             return null;
         }
-
         String[][] resultado = new String[count][10];
-
         int indice = 0;
         for (int i = 0; i < allData.length; i++) {
             if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
@@ -147,22 +143,18 @@ public class notasController {
                 indice++;
             }
         }
-
         return resultado;
     }
 
     public String[][] listarPorMateria(String materia) throws IOException {
         String[][] allData = listar();//listar
         int count = 0;
-
         for (String[] row : allData) {
             if (row[3].equalsIgnoreCase(materia)) {
                 count++;
             }
         }
-
         String[][] filteredData = new String[count][11];
-
         int index = 0;
         for (String[] row : allData) {
             if (row[3].equalsIgnoreCase(materia)) {
@@ -180,7 +172,6 @@ public class notasController {
                 index++;
             }
         }
-
         return filteredData;
     }
 

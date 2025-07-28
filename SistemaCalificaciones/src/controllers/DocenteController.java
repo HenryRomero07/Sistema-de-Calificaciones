@@ -149,7 +149,6 @@ public class DocenteController {
 
     public String[] obtenerMateriasDocente(String correoDocente) throws IOException {
         String[][] docentes = listar();
-
         for (String[] row : docentes) {
             if (row[4].equalsIgnoreCase(correoDocente)) {
                 return new String[]{row[7], row[8], row[9], row[10], row[11]};
@@ -157,6 +156,19 @@ public class DocenteController {
         }
         return new String[0];
     }
+    /*}String[][] docentes = listar();
+        String[] mater = new String[5];
+        for (String[] row : docentes) {
+            if (row[4].equalsIgnoreCase(correoDocente)) {
+                mater[0]=row[7];
+                mater[1]= row[8];
+                mater[2]=row[9];
+                mater[3]=row[10];
+                mater[4]=row[11];
+            }
+        }
+        return mater;
+    }*/
 
     public static void main(String[] args) {
         try {

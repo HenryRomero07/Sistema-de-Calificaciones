@@ -43,12 +43,14 @@ public class Login extends javax.swing.JDialog {
             if (data != null) {
                 String[] admin = ver.verificarCedula(data[0], adm.listar());
                 if (admin != null) {
+                    materia.setEnviar(admin);
                     JOptionPane.showMessageDialog(null, "Bienvenido administrador: "+admin[3]+","+admin[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                     new PaguinaAdministrador().setVisible(true);
                     dispose();
                 } 
                 String[] docen = ver.verificarCedula(data[0], doc.listar());
                 if (docen!=null) {
+                    materia.setEnviar(docen);
                     JOptionPane.showMessageDialog(null, "Bienvenido docente: "+docen[3]+","+docen[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                     try {
                         new ModuloDeDocentes(new javax.swing.JFrame(), true).setVisible(true);

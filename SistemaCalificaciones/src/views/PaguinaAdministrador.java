@@ -15,6 +15,7 @@ public class PaguinaAdministrador extends javax.swing.JFrame {
      */
     public PaguinaAdministrador() {
         initComponents();
+        setTitle("Administrador"+materia.getEnviar()[3]+","+materia.getEnviar()[2]);
     }
 
     /**
