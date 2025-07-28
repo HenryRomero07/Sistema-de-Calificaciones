@@ -17,7 +17,6 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
 
     private mt_asignacion mt = new mt_asignacion();
     private notasController nc = new notasController();
-    private Utilidades u = new Utilidades();
 
     /**
      * Creates new form Vista_notas

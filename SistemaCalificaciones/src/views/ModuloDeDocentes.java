@@ -251,7 +251,11 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMateria2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            new Vista_asignacionNotas(new javax.swing.JFrame(), true).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(ModuloDeDocentes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnMateria4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria4ActionPerformed

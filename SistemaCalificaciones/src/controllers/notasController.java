@@ -10,13 +10,14 @@ import utiles.Utilidades;
 public class notasController {
 
     private Utilidades u = new Utilidades();
+    //private DocenteController doc = new DocenteController();
     private String file_name = "notas";
-
+    private String name_fileVerificador = "Docentes";
     //Metodo para duplicar por materia 
     public void guardar(String Cedula, String Nombres, String Apellidos, String Materia, String Grado) throws IOException {
 
         String[] materia = new String[5];
-        String[][] docentes = u.listAll("Docentes");//modulo de docentes
+        String[][] docentes = u.listAll(name_fileVerificador);//modulo de docentes
 
         for (int i = 0; i < docentes.length; i++) {
             if (docentes[i][6].equalsIgnoreCase(Grado)) {
@@ -46,14 +47,15 @@ public class notasController {
         }
 
     }
-     public String [][] listar (){
-            try {
-                return u.listAll(file_name);
-            } catch (Exception e) {
-                System.out.println("Error en listar: " + e);
-                return new String [0][];
-            }
+
+    public String[][] listar() {
+        try {
+            return u.listAll(file_name);
+        } catch (Exception e) {
+            System.out.println("Error en listar: " + e);
+            return null;
         }
+    }
 
     public Float Calcular_promedio(float Nota1, float Nota2, float Nota3) {
         if (validacion(Nota1) && validacion(Nota2) && validacion(Nota3)) {
@@ -69,7 +71,7 @@ public class notasController {
     }
 
     public boolean actualizarNombreYNotas(int filaActualizar, String nuevoNombre, String[] nuevasNotas) throws IOException {
-        String[][] allData = u.listAll(file_name);// cambiar por listar
+        String[][] allData = listar();// cambiar por listar
         if (filaActualizar < 0 || filaActualizar >= allData.length) {
             System.out.println("Fila inválida");
             return false;
@@ -100,7 +102,7 @@ public class notasController {
     }
 
     public String[][] relistar() throws IOException {
-        String[][] allData = u.listAll(file_name);//listar
+        String[][] allData = listar();//listar
         String[][] filteredData = new String[allData.length][11]; // nombre + 9 notas
 
         int filaDestino = 0;
@@ -125,39 +127,38 @@ public class notasController {
         return resultado;
     }
 
-   public String[][] relistarEstudiante(String cedula) throws IOException {
-    String[][] allData = u.listAll(file_name);
+    public String[][] relistarEstudiante(String cedula) throws IOException {
+        String[][] allData = listar();
 
-    int count = 0;
-    for (int i = 0; i < allData.length; i++) {
-        if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
-            count++;
-        }
-    }
-
-    if (count == 0) {
-        return null;
-    }
-
-   
-    String[][] resultado = new String[count][10];
-
-    int indice = 0;
-    for (int i = 0; i < allData.length; i++) {
-        if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
-            resultado[indice][0] = allData[i][3]; 
-            for (int j = 0; j < 9; j++) {
-                resultado[indice][j + 1] = allData[i][4 + j]; 
+        int count = 0;
+        for (int i = 0; i < allData.length; i++) {
+            if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
+                count++;
             }
-            indice++;
         }
-    }
 
-    return resultado;
-}
+        if (count == 0) {
+            return null;
+        }
+
+        String[][] resultado = new String[count][10];
+
+        int indice = 0;
+        for (int i = 0; i < allData.length; i++) {
+            if (allData[i] != null && allData[i].length >= 13 && allData[i][0].equals(cedula)) {
+                resultado[indice][0] = allData[i][3];
+                for (int j = 0; j < 9; j++) {
+                    resultado[indice][j + 1] = allData[i][4 + j];
+                }
+                indice++;
+            }
+        }
+
+        return resultado;
+    }
 
     public String[][] listarPorMateria(String materia) throws IOException {
-        String[][] allData = u.listAll(file_name);//listar
+        String[][] allData = listar();//listar
         int count = 0;
 
         for (String[] row : allData) {

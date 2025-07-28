@@ -15,12 +15,12 @@ import java.util.Arrays;
 public class DocenteController {
 
     private Utilidades u = new Utilidades();
-
+    private notasController nota = new notasController();
     String name_file = "estudiantes";
     String name_fileVerificador = "Docentes";
 
-    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Correo, Curso Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
-        String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Correo + "\t" + Grado + "\t" + materia1
+    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Telefono, String Correo, Curso Grado, String materia1, String materia2, String materia3, String materia4, String materia5) {
+        String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Grado + "\t" + materia1
                 + "\t" + materia2 + "\t" + materia3 + "\t" + materia4 + "\t" + materia5 + "\n";
 
         try {
@@ -31,24 +31,26 @@ public class DocenteController {
             return false;
         }
     }
-    public String [][] listar (){
-            try {
-                return u.listAll(name_fileVerificador);
-            } catch (Exception e) {
-                System.out.println("Error en listar: " + e);
-                return new String [0][];
-            }
+
+    public String[][] listar() {
+        try {
+            return u.listAll(name_fileVerificador);
+        } catch (Exception e) {
+            System.out.println("Error en listar: " + e);
+            return null;
         }
+    }
+
     public String[][] listarEstudiantesPorDocente(String correoDocente) throws IOException {
-        String[][] docentes = u.listAll(name_fileVerificador); // modulo de Docentes
-        String[][] estudiantes = u.listAll(name_file); //modulo de Alumnos
-        String[][] notas = u.listAll("notas"); // modulo de chamba
+        String[][] docentes = listar(); // modulo de Docentes
+        String[][] estudiantes = u.listAll(name_file);//modulo de Alumnos
+        String[][] notas = nota.listar(); // modulo de chamba
 
         String gradoDocente = null;
 
         for (String[] row : docentes) {
-            if (row[4].equalsIgnoreCase(correoDocente)) {
-                gradoDocente = row[5];
+            if (row[5].equalsIgnoreCase(correoDocente)) {
+                gradoDocente = row[6];
                 break;
             }
         }
@@ -59,7 +61,7 @@ public class DocenteController {
 
         int countEst = 0;
         for (String[] row : estudiantes) {
-            if (row[5].equalsIgnoreCase(gradoDocente)) {
+            if (row[6].equalsIgnoreCase(gradoDocente)) {
                 countEst++;
             }
         }
@@ -71,7 +73,7 @@ public class DocenteController {
         String[] cedulas = new String[countEst];
         int pos = 0;
         for (String[] row : estudiantes) {
-            if (row[5].equalsIgnoreCase(gradoDocente)) {
+            if (row[6].equalsIgnoreCase(gradoDocente)) {
                 cedulas[pos] = row[0];
                 pos++;
             }
@@ -146,19 +148,18 @@ public class DocenteController {
     }
 
     public String[] obtenerMateriasDocente(String correoDocente) throws IOException {
-        String[][] docentes = u.listAll(name_fileVerificador);
+        String[][] docentes = listar();
 
         for (String[] row : docentes) {
             if (row[4].equalsIgnoreCase(correoDocente)) {
-                return new String[]{row[6], row[7], row[8], row[9], row[10]};
+                return new String[]{row[7], row[8], row[9], row[10], row[11]};
             }
         }
         return new String[0];
     }
-    
-    
+
     public static void main(String[] args) {
-   try {
+        try {
             DocenteController controller = new DocenteController();
 
             // Correo de prueba
@@ -177,6 +178,5 @@ public class DocenteController {
         }
     }
 }
-
     
 

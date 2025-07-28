@@ -73,9 +73,8 @@ public class RegistarDocente extends javax.swing.JDialog {
                                         materias[i] = materia.getMaterias()[i];
                                     }   
                                     if (log.registrarCu(txtIdentificacion.getText(), txtCorreo.getText(),
-                                            String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&& doc.guardar(txtIdentificacion.getText(), 
-                                                    TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), txtNombres.getText(), txtApellidos.getText(),txtTelefono.getText(), 
-                                                    txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), materias[0], materias[1], materias[2], materias[3], materias[4])) {
+                                            String.valueOf(txtcontrasena1.getPassword()), txtTelefono.getText())&& doc.guardar(txtIdentificacion.getText(), TipoIdentificacion.valueOf(cbxtipo.getSelectedItem().toString()), 
+                                                    txtNombres.getText(), txtApellidos.getText(),txtTelefono.getText() ,txtCorreo.getText(), Curso.valueOf(cbxcurso.getSelectedItem().toString()), materias[0], materias[1], materias[2], materias[3], materias[4])) {
                                         Limpiar();
                                         JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                                     } else {

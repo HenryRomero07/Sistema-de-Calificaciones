@@ -9,6 +9,7 @@ package views;
  * @author franz
  */
 public class materia {
+    private static String[] enviar;
     public static String[] materias;
     
 
@@ -18,6 +19,14 @@ public class materia {
 
     public static void setMaterias(String[] materias) {
         materia.materias = materias;
+    }
+
+    public static String[] getEnviar() {
+        return enviar;
+    }
+
+    public static void setEnviar(String[] enviar) {
+        materia.enviar = enviar;
     }
     
 }

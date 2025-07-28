@@ -4,7 +4,10 @@
  */
 package views;
 import controllers.AlumnosController;
-import view.tables.ModeloTablaNotas;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modeloTabla.ModeloTablaNotas;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Usuario iTC
  */
 public class Sistemalumnos extends javax.swing.JDialog {
+    private AlumnosController ac = new AlumnosController();
     public Sistemalumnos(java.awt.Frame parent, boolean modal) {
         super (parent, modal);
         initComponents();
@@ -29,26 +33,24 @@ public class Sistemalumnos extends javax.swing.JDialog {
     }
 }
     private void cargarDatos(){
-        String correoSimulado = "juanperez@unl.edu.ec";
-        
-        AlumnosController ac = new AlumnosController();
-        String [][] datos = ac.buscarPorcorreo(correoSimulado);
-        
-        if (datos.length == 0){
-            JOptionPane.showMessageDialog(this, "No se encontraron datos para el correo: " + correoSimulado);
+        System.out.println(materia.getEnviar()[5]);
+        String[] datos = ac.buscarPorcorreo(materia.getEnviar()[5]);
+        System.out.println(datos[0]);
+        if (datos.length==0){
+            JOptionPane.showMessageDialog(this, "No se encontraron datos para el correo: " +materia.getEnviar()[5]);
             return;
         }
        
-        String cedula = datos [0][0];
+        String cedula = datos [0];
         String [][] datosNotas = ac.buscarNotasPorCedula(cedula);
         if(datosNotas.length == 0){
             JOptionPane.showMessageDialog(this, "No se encontraron notas para el alumno con cédula: " + cedula);
             return;
         }
-        estudiante.setText(datos[0][1] + " " + datos [0][2]);
-        id.setText(datos[0][0]);
-        correo.setText(datos[0][4]);
-        jLabel6.setText(datos[0][5]);
+        estudiante.setText(datos[1] + " " + datos[2]);
+        id.setText(datos[0]);
+        correo.setText(datos[5]);
+        jLabel6.setText(datos[6]);
         
         int filas = datosNotas.length;
         String [][] notasParaTabla = new String [filas][4];
@@ -206,12 +208,26 @@ public class Sistemalumnos extends javax.swing.JDialog {
 
         jButton1.setFont(new java.awt.Font("sansserif", 3, 18)); // NOI18N
         jButton1.setText("Detalles");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
-        jButton1.setBounds(470, 400, 120, 31);
+        jButton1.setBounds(470, 400, 120, 34);
 
         setSize(new java.awt.Dimension(628, 493));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            new Vista_notasEstudianteDetallado(new javax.swing.JFrame(), true);
+        } catch (IOException ex) {
+            Logger.getLogger(Sistemalumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

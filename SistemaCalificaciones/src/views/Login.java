@@ -9,6 +9,9 @@ import controllers.ARadministrador;
 import controllers.AlumnosController;
 import controllers.ControllerLogin;
 import controllers.DocenteController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,11 +50,16 @@ public class Login extends javax.swing.JDialog {
                 String[] docen = ver.verificarCedula(data[0], doc.listar());
                 if (docen!=null) {
                     JOptionPane.showMessageDialog(null, "Bienvenido docente: "+docen[3]+","+docen[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
-                    
+                    try {
+                        new ModuloDeDocentes(new javax.swing.JFrame(), true).setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 } 
                 String[] estud = ver.verificarCedula(data[0], est.listar());
                 if (estud!=null) {
+                    materia.setEnviar(estud);
                     JOptionPane.showMessageDialog(null, "Bienvenido estudeiante: "+estud[3]+","+estud[2], "Mensaje de exito", JOptionPane.INFORMATION_MESSAGE);
                     new Sistemalumnos(new javax.swing.JFrame(), true).setVisible(true);
                     dispose();
