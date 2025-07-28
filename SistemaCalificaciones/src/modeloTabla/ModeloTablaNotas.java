@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modeloTabla;
+package view.tables;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -36,13 +36,13 @@ public class ModeloTablaNotas extends AbstractTableModel{
     @Override
     public Object getValueAt(int fila, int columna) {
         try {
-            double n1 = parseNota(datos[fila][5]);
-            double n2 = parseNota(datos[fila][6]);
-            double n3 = parseNota(datos[fila][7]);
+            double n1 = parseNota(datos[fila][1]);
+            double n2 = parseNota(datos[fila][2]);
+            double n3 = parseNota(datos[fila][3]);
             
             switch (columna){
                 case 0:
-                    return datos [fila][4];
+                    return datos [fila][0];
                 case 1:
                     return n1;
                 case 2:

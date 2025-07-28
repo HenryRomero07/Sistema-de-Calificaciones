@@ -4,58 +4,77 @@
  */
 package controllers;
 
-import enums.Curso;
-import enums.TipoIdentificacion;
 import utiles.Utilidades;
-
 public class AlumnosController {
-
     private Utilidades util = new Utilidades();
-    private NotasController not = new NotasController();
-    private String archivo = "notas_estudiantes";
-    private String archivo_alumnos = "Notas_alumnos";
-
-    public boolean guardar(String Cedula, TipoIdentificacion TipoID, String Nombres, String Apellidos, String Telefono, String Correo, Curso Curso, String Materias) {
-        String data = Cedula + "\t" + TipoID + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\t" + Materias +"\n";
-        try {
-            util.save(data, archivo_alumnos);
-            return true;
-        } catch (Exception e) {
-            System.out.println("e");
-            return false;
+       private String archivo_alumnos = "Notas_alumnos";
+       private String archivo_notas = "asg_notas";
+        public boolean guardar(String Cedula, String Nombres, String Apellidos, String Telefono, String Correo, String Curso, String [][] Materias){
+            String data = Cedula + "\t" + Nombres + "\t" + Apellidos + "\t" + Telefono + "\t" + Correo + "\t" + Curso + "\t" + Materias + "\n";
+            try {
+                util.save(data,"Notas_alumnos");
+                return true;
+            } catch (Exception e){
+                System.out.println("Error al guardar estudiante: " + e);
+                return false; 
+            }
         }
-    }
-
-    public String[][] listar() {
-        try {
-            return util.listAll(archivo_alumnos);
-        } catch (Exception e) {
-            System.out.println("Error en listar" + e);
-            return null;
+        public String [][] listar (){
+            try {
+                return util.listAll(archivo_alumnos);
+            } catch (Exception e) {
+                System.out.println("Error en listar: " + e);
+                return new String [0][];
+            }
         }
-    }
-
-    public String[][] buscarPorcorreo(String Correo) {
+        public String [][] buscarPorcorreo (String Correo){
         try {
-            String[][] todos = not.listar();
-
+            String [][] todos = util.listAll(archivo_alumnos);
+            
             int count = 0;
-            for (int i = 0; i < todos.length; i++) {
-                if (todos[i][2].equalsIgnoreCase(Correo)) {
-                    count++;
+            for (int i = 0; i < todos.length; i++){
+                if(todos[i][4].equalsIgnoreCase(Correo)){
+                    count ++;
                 }
             }
-            String[][] filtrado = new String[count][];
+            String [][] filtrado = new String [count][];
             int pos = 0;
-            for (int i = 0; i < todos.length; i++) {
-                if (todos[i][2].equalsIgnoreCase(Correo)) {
-                    filtrado[pos++] = todos[i];
+            for (int i = 0; i < todos.length; i ++){
+                if (todos [i][4].equalsIgnoreCase(Correo)){
+                    filtrado[pos++] = todos [i];
                 }
             }
             return filtrado;
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println("Error al buscar: " + e);
-            return new String[0][];
+            return new String [0][];
         }
     }
+        public String [][] buscarNotasPorCedula (String Cedula){
+            try {
+                String [][] Notas = util.listAll(archivo_notas);
+                int count = 0;
+                for(int i = 0; i < Notas.length; i++){
+                    if(Notas[i][0].equalsIgnoreCase(Cedula)){
+                        count ++;
+                    }
+                }
+                String [][] notasFiltradas = new String [count][4];
+                int pos = 0;
+                for (int i = 0; i < Notas.length; i++){
+                    if(Notas[i][0].equalsIgnoreCase(Cedula)){
+                        notasFiltradas[pos] = new String[4];
+                        notasFiltradas[pos][0] = Notas[i].length > 2 ? Notas [i][2]: "";
+                        notasFiltradas[pos][1] = Notas[i].length > 6 ? Notas [i][6]: "0";
+                        notasFiltradas[pos][2] = Notas[i].length > 10 ? Notas [i][10]: "0";
+                        notasFiltradas[pos][3] = Notas[i].length > 14 ? Notas [i][14]: "0";
+                        pos++;
+                    }
+                }
+                return notasFiltradas;
+            } catch (Exception e) {
+                System.out.println("Error al buscar nostas por cedula: " + e);
+                return new String [0][];
+            }
+        }
 }
