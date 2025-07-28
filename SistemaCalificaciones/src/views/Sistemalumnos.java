@@ -35,7 +35,6 @@ public class Sistemalumnos extends javax.swing.JDialog {
     private void cargarDatos(){
         System.out.println(materia.getEnviar()[5]);
         String[] datos = ac.buscarPorcorreo(materia.getEnviar()[5]);
-        System.out.println(datos[0]);
         if (datos.length==0){
             JOptionPane.showMessageDialog(this, "No se encontraron datos para el correo: " +materia.getEnviar()[5]);
             return;
@@ -56,6 +55,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
         String [][] notasParaTabla = new String [filas][4];
         for (int i = 0; i < filas; i++){
             notasParaTabla[i][0] = datosNotas[i][0];
+            System.out.println(datosNotas[i][0]);
             notasParaTabla[i][1] = datosNotas[i][1];
             notasParaTabla[i][2] = datosNotas[i][2];
             notasParaTabla[i][3] = datosNotas[i][3];

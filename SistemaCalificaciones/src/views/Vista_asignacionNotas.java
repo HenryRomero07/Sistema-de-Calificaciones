@@ -29,8 +29,10 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     }
 
     public void cargarTabla() throws IOException {
-        String materia = botonmateria.getText();
-        mt.setData(nc.listarPorMateria(materia));
+        String asignatura = materia.getNotas();
+        botonmateria.setText(materia.getNotas());
+        System.out.println(materia.getNotas());
+        mt.setData(nc.listarPorMateria(asignatura));
         tabla.setModel(mt);
         tabla.updateUI();
     }
@@ -79,6 +81,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         cerrar = new javax.swing.JButton();
+        jLabelmaterian = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -110,7 +113,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Notas de: Lengua");
+        jLabel4.setText("Notas de: ");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,6 +137,11 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
             }
         });
 
+        jLabelmaterian.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelmaterian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelmaterian.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelmaterian.setText("Notas de: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +161,10 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(botonmateria, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelmaterian)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cerrar)
                                 .addGap(38, 38, 38)
@@ -172,7 +183,9 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
                             .addComponent(jLabel2)
                             .addComponent(botonmateria, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelmaterian, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,6 +269,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelmaterian;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;

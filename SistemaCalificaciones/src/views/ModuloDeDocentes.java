@@ -33,11 +33,11 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     }
 
     private void asignar() throws IOException {
-        String[] materias = controlador.obtenerMateriasDocente(correoDocente);
-        /*String[] materias = new String[5];
+        //String[] materias = controlador.obtenerMateriasDocente(correoDocente);
+        String[] materias = new String[5];
         for(int i = 0;i < 5;i++){
-        materias[i] = materia.getEnviar()[i];
-        }*/
+        materias[i] = materia.getEnviar()[i+7];
+        }
         
         btnMateria1.setText(materias[0]);
         btnMateria2.setText(materias[1]);
@@ -65,8 +65,8 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     }
 
     private void cargarTabla() throws IOException {
-        String materia = "Artes";
-        mlt.setData(controlador.listarPorMateria(materia, correoDocente));
+        String asignatura = materia.getEnviar()[7];
+        mlt.setData(controlador.listarPorMateria(asignatura, correoDocente));
         jTable2.setModel(mlt);
         jTable2.updateUI();
     }
@@ -259,11 +259,12 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void btnMateria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria1ActionPerformed
         // TODO add your handling code here:
-
+        materia.setNotas(materia.getEnviar()[7]);
     }//GEN-LAST:event_btnMateria1ActionPerformed
 
     private void btnMateria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria2ActionPerformed
         // TODO add your handling code here:
+        materia.setNotas(materia.getEnviar()[8]);
     }//GEN-LAST:event_btnMateria2ActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
@@ -272,14 +273,17 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void btnMateria4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria4ActionPerformed
         // TODO add your handling code here:
+        materia.setNotas(materia.getEnviar()[10]);
     }//GEN-LAST:event_btnMateria4ActionPerformed
 
     private void btnMateria3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria3ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:+
+        materia.setNotas(materia.getEnviar()[9]);
     }//GEN-LAST:event_btnMateria3ActionPerformed
 
     private void btnMateria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria5ActionPerformed
         // TODO add your handling code here:
+        materia.setNotas(materia.getEnviar()[11]);
     }//GEN-LAST:event_btnMateria5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
