@@ -32,7 +32,7 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ver.CrearAdministrador();
-        limpiar();
+        //limpiar();
     }
     
     public void inicioSesion() {
@@ -108,6 +108,7 @@ public class Login extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario"));
         jPanel3.setLayout(null);
 
+        txtcorreo.setText("rosa.edu");
         txtcorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcorreoActionPerformed(evt);
@@ -121,6 +122,13 @@ public class Login extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Contraseña"));
         jPanel2.setLayout(null);
+
+        txtcontraseña.setText("333");
+        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontraseñaActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtcontraseña);
         txtcontraseña.setBounds(7, 18, 240, 30);
 
@@ -146,12 +154,18 @@ public class Login extends javax.swing.JDialog {
 
     private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
         // TODO add your handling code here:
+        inicioSesion();
     }//GEN-LAST:event_txtcorreoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         inicioSesion();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
+        // TODO add your handling code here:
+        inicioSesion();
+    }//GEN-LAST:event_txtcontraseñaActionPerformed
 
     /**
      * @param args the command line arguments

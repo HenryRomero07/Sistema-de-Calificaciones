@@ -1,13 +1,11 @@
 package views;
 
-
 import controllers.notasController;
 import modeloTabla.mt_asignacion;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -36,11 +34,30 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
         tabla.setModel(mt);
         tabla.updateUI();
     }
-    
+
     public void actualizarTabla() {
-        int filas = tabla.getRowCount();
+        int filas = tabla.getSelectedRow();
+
         try {
-            for (int i = 0; i < filas; i++) {
+            System.out.println("xxxx " + filas);
+            if (filas >= 0) {
+                String[] nuevasNotas = new String[mt.getData()[0].length];
+
+                for (int i = 0; i < nuevasNotas.length; i++) {
+                    System.out.println(mt.getData()[filas][i]);
+                    nuevasNotas[i] = mt.getData()[filas][i];
+                }
+
+                boolean exito = nc.actualizarNombreYNotas(filas, nuevasNotas);
+                if (!exito) {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar fila " + filas);
+                    return;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un dato d ela tabla.");
+            }
+            /*for (int i = 0; i < filas; i++) {
                 String nuevoNombre = (String) tabla.getValueAt(i, 0);
 
                 String[] nuevasNotas = new String[9];
@@ -54,9 +71,9 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Error al actualizar fila " + i);
                     return;
                 }
-            }
+            }*/
             JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
-            cargarTabla();  
+            cargarTabla();
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al guardar archivo: " + ex.getMessage());
@@ -204,7 +221,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-  actualizarTabla();
+        actualizarTabla();
     }//GEN-LAST:event_actualizarActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed

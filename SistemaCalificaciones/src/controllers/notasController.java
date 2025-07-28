@@ -64,25 +64,33 @@ public class notasController {
         return nota >= 0 && nota <= 10;
     }
 
-    public boolean actualizarNombreYNotas(int filaActualizar, String nuevoNombre, String[] nuevasNotas) throws IOException {
+    public boolean actualizarNombreYNotas(String[] nuevasNotas) throws IOException {
+        //cedula apellidos nombres materia notas ....
+        
         String[][] allData = listar();// cambiar por listar
-        if (filaActualizar < 0 || filaActualizar >= allData.length) {
+        if (nuevasNotas.length > 0) {
             System.out.println("Fila inválida");
             return false;
         }
-        allData[filaActualizar][1] = nuevoNombre;
+        int pos = -1;
+        for (int i = 0; i < allData.length; i++) {
+            if(nuevasNotas[0].equalsIgnoreCase(allData[i][0]) && nuevasNotas[3].equalsIgnoreCase(allData[i][3])) {
+                pos = i;
+                break;
+            }
+            //allData[filaActualizar][i] = nuevasNotas[i];
+        }
+        
+        for (int i = 0; i < nuevasNotas.length; i++) {
+            System.out.println("*** ----"+nuevasNotas[i]);
+            allData[pos][i] = nuevasNotas[i];
+        }
 
-        if (nuevasNotas.length != 9) {
-            System.out.println("Se esperan 9 notas");
-            return false;
-        }
-        for (int i = 1; i < 9; i++) {
-            allData[filaActualizar][3 + i] = nuevasNotas[i];
-        }
+        
 
         StringBuilder contenidoNuevo = new StringBuilder();
         for (int i = 0; i < allData.length; i++) {
-            for (int j = 0; j < allData[i].length; j++) {
+            for (int j = 0; j < allData[0].length; j++) {
                 contenidoNuevo.append(allData[i][j]);
                 if (j < allData[i].length - 1) {
                     contenidoNuevo.append("\t");
@@ -90,6 +98,7 @@ public class notasController {
             }
             contenidoNuevo.append("\n");
         }
+        System.out.println(contenidoNuevo.toString());
 
         u.actualizar(contenidoNuevo.toString(), file_name);
         return true;

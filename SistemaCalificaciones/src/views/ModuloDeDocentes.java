@@ -33,7 +33,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
     }
 
     private void asignar() throws IOException {
-        //String[] materias = controlador.obtenerMateriasDocente(correoDocente);
+        
         String[] materias = new String[5];
         for(int i = 0;i < 5;i++){
         materias[i] = materia.getEnviar()[i+7];
@@ -66,6 +66,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void cargarTabla() throws IOException {
         String asignatura = materia.getEnviar()[7];
+        jLabelNombreMateria.setText(materia.getEnviar()[7]);
         materia.setNotas(materia.getEnviar()[7]);
         mlt.setData(controlador.listarPorMateria(asignatura, correoDocente));
         jTable2.setModel(mlt);
