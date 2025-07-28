@@ -31,11 +31,11 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
         botonmateria.setText(materia.getNotas());
         mt.setData(nc.listarPorMateria(asignatura));
         tabla.setModel(mt);
+        tabla.updateUI();
     }
 
     public void actualizarTabla() {
         int filas = tabla.getSelectedRow();
-
         try {
             System.out.println("xxxx " + filas);
             if (filas >= 0) {
@@ -44,7 +44,7 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
                     System.out.println(mt.getData()[filas][i]);
                     nuevasNotas[i] = mt.getData()[filas][i];
                 }
-
+                
                 boolean exito = nc.actualizarNombreYNotas(nuevasNotas);
                 if (!exito) {
                     JOptionPane.showMessageDialog(null, "Error al actualizar fila " + filas);
@@ -54,21 +54,6 @@ public class Vista_asignacionNotas extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un dato d ela tabla.");
             }
-            /*for (int i = 0; i < filas; i++) {
-                String nuevoNombre = (String) tabla.getValueAt(i, 0);
-
-                String[] nuevasNotas = new String[9];
-                for (int j = 0; j < 9; j++) {
-                    Object val = tabla.getValueAt(i, j + 1);
-                    nuevasNotas[j] = val != null ? val.toString() : "0.0";
-                }
-
-                boolean exito = nc.actualizarNombreYNotas(i, nuevoNombre, nuevasNotas);
-                if (!exito) {
-                    JOptionPane.showMessageDialog(null, "Error al actualizar fila " + i);
-                    return;
-                }
-            }*/
             JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
             cargarTabla();
         } catch (IOException ex) {
