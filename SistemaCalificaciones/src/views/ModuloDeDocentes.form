@@ -174,7 +174,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="30" y="20" width="110" height="-1"/>
+                  <AbsoluteConstraints x="30" y="20" width="200" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -232,7 +232,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMateria1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sociales"/>
+                <Property name="text" type="java.lang.String" value="&quot;&quot;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder/>
@@ -250,7 +250,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMateria2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="F&#xed;sica"/>
+                <Property name="text" type="java.lang.String" value="&quot;&quot;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder/>
@@ -268,7 +268,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMateria3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Discretas"/>
+                <Property name="text" type="java.lang.String" value="&quot;&quot;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder/>
@@ -286,7 +286,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMateria4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Matematicas"/>
+                <Property name="text" type="java.lang.String" value="&quot;&quot;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder/>
@@ -304,7 +304,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnMateria5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Biologia"/>
+                <Property name="text" type="java.lang.String" value="&quot;&quot;"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder/>
