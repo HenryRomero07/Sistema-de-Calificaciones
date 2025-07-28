@@ -66,6 +66,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void cargarTabla() throws IOException {
         String asignatura = materia.getEnviar()[7];
+        materia.setNotas(materia.getEnviar()[7]);
         mlt.setData(controlador.listarPorMateria(asignatura, correoDocente));
         jTable2.setModel(mlt);
         jTable2.updateUI();
@@ -269,6 +270,7 @@ public class ModuloDeDocentes extends javax.swing.JDialog {
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         dispose();
+        new Login(new javax.swing.JFrame(), true).setVisible(true);
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void btnMateria4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMateria4ActionPerformed

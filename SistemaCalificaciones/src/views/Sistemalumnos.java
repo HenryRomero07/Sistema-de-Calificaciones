@@ -55,7 +55,6 @@ public class Sistemalumnos extends javax.swing.JDialog {
         String [][] notasParaTabla = new String [filas][4];
         for (int i = 0; i < filas; i++){
             notasParaTabla[i][0] = datosNotas[i][0];
-            System.out.println(datosNotas[i][0]);
             notasParaTabla[i][1] = datosNotas[i][1];
             notasParaTabla[i][2] = datosNotas[i][2];
             notasParaTabla[i][3] = datosNotas[i][3];
@@ -233,6 +232,7 @@ public class Sistemalumnos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
+        new Login(new javax.swing.JFrame(), true).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

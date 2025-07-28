@@ -76,7 +76,7 @@ public class AlumnosController {
             for (int i = 0; i < Notas.length; i++) {
                 if (Notas[i][0].equalsIgnoreCase(Cedula)) {
                     notasFiltradas[pos] = new String[4];
-                    notasFiltradas[pos][0] = Notas[i].length > 2 ? Notas[i][2] : "";
+                    notasFiltradas[pos][0] = Notas[i].length > 3 ? Notas[i][3] : "";
                     notasFiltradas[pos][1] = Notas[i].length > 6 ? Notas[i][6] : "0";
                     notasFiltradas[pos][2] = Notas[i].length > 10 ? Notas[i][10] : "0";
                     notasFiltradas[pos][3] = Notas[i].length > 14 ? Notas[i][14] : "0";
